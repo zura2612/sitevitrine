@@ -1,0 +1,46 @@
+{
+  "hero": {
+    "primary": "Des soins complets et adaptés, pour le bien-être de chaque animal.",
+    "secondary": "Du simple démêlage au toilettage complet selon les standards de race, nous mettons tout notre savoir-faire et notre douceur au service du confort et de la santé de votre compagnon."
+  },
+  "services": {
+    "cartes": [
+      {
+        "iconKey": "Scissors",
+        "title": "Tonte",
+        "text": "Tonte et finitions aux ciseaux respectant scrupuleusement les standards morphologiques de sa race.",
+        "bouton": "Demander un devis gratuit"
+      },
+      {
+        "iconKey": "Brush",
+        "title": "Brossage",
+        "text": "Traitement en douceur des noeuds tenaces et des bourres, avec des techniques de brossage qui préservent la peau et le confort de l'animal.",
+        "bouton": "Demander un devis gratuit"
+      },
+      {
+        "iconKey": "Heart",
+        "title": "Soins annexes",
+        "text": "Coupe des griffes, nettoyage des oreilles, vidange des glandes anales et repérage précoce d'éventuels problèmes cutanés lors de la manipulation.",
+        "bouton": "Demander un devis gratuit"
+      },
+      {
+        "iconKey": "Baby",
+        "title": "Familiarisation",
+        "text": "Premiers rendez-vous dédiés à l'habituation en douceur aux manipulations, au bruit du séchoir et à la table de toilettage pour de futurs adultes sereins.",
+        "bouton": "Demander un devis gratuit"
+      },
+      {
+        "iconKey": "Droplet",
+        "title": "Bain",
+        "text": "Utilisation de shampoings spécifiques (hypoallergéniques, antiparasitaires ou hydratants) adaptés aux besoins dermatologiques particuliers de votre animal.",
+        "bouton": "Demander un devis gratuit"
+      },
+      {
+        "iconKey": "CheckCircle2",
+        "title": "Conseils",
+        "text": "Explications détaillées des soins réalisés et recommandations personnalisées pour maintenir le pelage et l'hygiène en parfait état entre deux rendez-vous.",
+        "bouton": "Demander un devis gratuit"
+      }
+    ]
+  }
+}

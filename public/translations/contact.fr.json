@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "secondary": "Décrivez-nous les besoins de votre compagnon, nous vous rappelons rapidement avec un premier conseil et un devis gratuit.",
+    "primary": "Parlons des besoins de votre compagnon."
+  },
+  "formulaire": {
+    "confidentialite": "Vos données et celles de votre animal restent confidentielles et ne sont utilisées que pour traiter votre demande.",
+    "telephone": "votre numéro de téléphone",
+    "champ": "* champ obligatoire",
+    "bouton": "Envoyer la demande",
+    "message": "votre message *",
+    "message_suggestion": "Précisez votre adresse, le nom, la race et l'âge de votre animal, etc...",
+    "message_tooltip": "Veuillez renseigner ce champ.",
+    "projet": "type de soins",
+    "email": "votre email *",
+    "identite": "prénom nom *"
+  },
+  "toast": {
+    "succes": "Demande envoyée ! Nous vous recontactons sous 48h au plus tard.",
+    "erreur_resend": "Erreur lors de l'envoi. Nous sommes désolés. Envoyez-nous directement un courriel.",
+    "erreur_reseau": "Erreur réseau. La demande n'a pas pu être envoyée. Vérifiez votre connexion à internet."
+  },
+  "projets": {
+    "defaut": "Autre (précisez)",
+    "labels": [ 
+    { "option": "Brossage" },
+    { "option": "Bain" },
+    { "option": "Tonte" },
+    { "option": "Soins annexes" },
+    { "option": "Familiarisation" },
+    { "option": "Conseils" },
+    { "option": "Autre" }
+    ]
+  }
+}

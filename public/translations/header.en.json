@@ -1,0 +1,12 @@
+{
+  "navigation": {
+    "labels": [
+      { "bouton": "Home", "to": "/" },
+      { "bouton": "Services", "to": "/services" },
+      { "bouton": "About", "to": "/about" },
+      { "bouton": "Contact", "to": "/contact" },
+      { "bouton": "Appointment", "to": "/rendez-vous" }
+    ],
+    "cta": { "bouton": "Free quote", "to": "/contact" }
+  }
+}

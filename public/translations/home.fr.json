@@ -1,0 +1,103 @@
+{
+  "hero": {
+    "primaryBefore": "Votre toiletteuse de ",
+    "primaryAccent": "confiance et douceur",
+    "primaryAfter": " en Lot-et-Garonne.",
+    "secondary": "Des noeuds tenaces, un toilettage selon les standards de race ou des soins d'hygiène à venir ? {entreprise} prend soin de votre compagnon avec des techniques professionnelles, douces et garanties.",
+    "photo": "vehicule.jpg"
+  },
+  "trustbar": {
+    "items": [
+      { "iconKey": "Award", "label": "Toiletteuse certifiée et formée" },
+      { "iconKey": "ShieldCheck", "label": "Assurance professionnelle complète" },
+      { "iconKey": "Clock", "label": "Bien-être et douceur garantis" }
+    ]
+  },
+  "pourquoi": {
+    "title": "Pourquoi nous choisir pour le toilettage ?",
+    "primary": "Un compagnon serein, sans crainte du prochain rendez-vous.",
+    "secondary": "Un pelage négligé ou des noeuds tenaces, c'est plus qu'un désagrément : c'est un risque pour la santé cutanée de votre animal. Nous intervenons pour rétablir le confort, l'hygiène et le bien-être de votre compagnon grâce à des bains et séchages adaptés, et un repérage précoce des éventuels problèmes de peau.",
+    "cartes": [
+      { 
+        "iconKey": "PlugZap", 
+        "title": "Noeuds et pelages emmêlés", 
+        "text": "Démêlage en douceur, brossage adapté et bains spécifiques pour restaurer la santé et la beauté du pelage sans stress." 
+      },
+      { 
+        "iconKey": "ShieldCheck", 
+        "title": "Toilettage selon les standards", 
+        "text": "Tonte professionnelle et finitions aux ciseaux respectant scrupuleusement les standards de race et la morphologie de votre chien." 
+      },
+      { 
+        "iconKey": "Lightbulb", 
+        "title": "Soins d'hygiène et annexes", 
+        "text": "Coupe des griffes, nettoyage des oreilles, vidange des glandes anales et repérage des problèmes cutanés pour une santé globale." 
+      }
+    ]
+  },
+  "processus": {
+    "title": "Notre processus de toilettage",
+    "primary": "Simple, transparent, et sans stress : nous lisons le langage corporel de votre animal pour adapter notre contention.",
+    "cartes": [
+      { 
+        "num": "01", 
+        "title": "Évaluation bienveillante", 
+        "text": "Analyse du pelage, de la peau et du tempérament de votre compagnon pour définir les soins les plus adaptés." 
+      },
+      { 
+        "num": "02", 
+        "title": "Devis clair et personnalisé", 
+        "text": "Un chiffrage détaillé selon la race, la taille et l'état du pelage, expliqué en toute transparence avant le début des soins." 
+      },
+      { 
+        "num": "03", 
+        "title": "Toilettage en douceur", 
+        "text": "Des soins réalisés avec patience, contention douce et gestion du stress, pour que votre animal reparte propre et apaisé." 
+      }
+    ]
+  },
+  "realisations": {
+    "title": "Nos transformations",
+    "primary": "Des résultats qui parlent pour nous.",
+    "cartes": [
+      { "srcKey": "realisation_1.jpg", "title": "Avant/Après", "location": "Tonneins" },
+      { "srcKey": "realisation_2.jpg", "title": "Premier toilettage pour Bianca", "location": "Marmande" },
+      { "srcKey": "realisation_3.jpg", "title": "On va être tout propre après", "location": "Bouglon" }
+    ]
+  },
+  "temoignages": {
+    "title": "Témoignages",
+    "primary": "Ils nous ont fait confiance pour leur compagnon.",
+    "cartes": [
+      { "name": "Mathias Ostanel", "date": "janvier 2024", "text": "Toilettage de notre chien en toute douceur, travail très propre et respectueux de son stress. Résultat impeccable !" },
+      { "name": "Elysa Thomas", "date": "janvier 2024", "text": "Une réactivité et une disponibilité hors pair. Toiletteuse gentille et très professionnelle, mon chien est ressorti apaisé et magnifique." },
+      { "name": "Julie Martet", "date": "mars 2024", "text": "Toiletteuse réactive et professionnelle. Le travail est soigné, les conseils pour l'entretien du poil sont précieux. Je recommande." },
+      { "name": "Clara Navail", "date": "décembre 2024", "text": "Superbe expérience, travail sérieux, personne sympathique, démêlage rapide et sans douleur ! Une vraie passionnée, tout était top !" },
+      { "name": "Jean Corentin", "date": "mai 2025", "text": "Une vraie professionnelle ! Prend toujours le temps d'expliquer les soins après le toilettage. Travail propre, nickel, mon chien adore y aller. Je recommande fortement !" },
+      { "name": "Ivoa Bille", "date": "octobre 2025", "text": "Probablement la meilleure toiletteuse avec qui nous avons eu la chance de faire appel. Très réactive, organisée, prévenante, de bon conseil pour le pelage, efficace et j’en passe..." }
+    ]
+  },
+  "faq": {
+    "title": "FAQ",
+    "primary": "Vos questions, nos réponses.",
+    "secondary": "Vous ne trouvez pas votre réponse ? Appelez-nous, nous prendrons toujours le temps de vous répondre et de rassurer votre animal.",
+    "questions": [
+      { 
+        "question": "Intervenez-vous sur tout le Lot-et-Garonne ?", 
+        "answer": "Nous accueillons vos compagnons dans notre véhicule et couvrons tout le Lot et Garonne" 
+      },
+      { 
+        "question": "Le devis pour le toilettage est-il vraiment gratuit ?", 
+        "answer": "Absolument. Nous évaluons gratuitement l'état du pelage et les besoins de votre animal pour vous remettre un devis détaillé et sans engagement." 
+      },
+      { 
+        "question": "Comment gérez-vous les chiens stressés ou anxieux ?", 
+        "answer": "La gestion du stress est notre priorité. Nous utilisons des techniques de contention douce, faisons des pauses si nécessaire et lisons le langage corporel de votre animal pour garantir une expérience positive et sans traumatisme." 
+      },
+      { 
+        "question": "Les soins annexes (griffes, oreilles, glandes anales) sont-ils inclus ?", 
+        "answer": "Oui, nos formules de toilettage complet incluent systématiquement le nettoyage des oreilles, la coupe des griffes et la vidange des glandes anales, réalisés avec délicatesse et hygiène." 
+      }
+    ]
+  }
+}

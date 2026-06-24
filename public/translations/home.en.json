@@ -1,0 +1,103 @@
+{
+  "hero": {
+    "primaryBefore": "Your dog groomer of ",
+    "primaryAccent": "trust and gentleness",
+    "primaryAfter": " in Lot-et-Garonne.",
+    "secondary": "Stubborn mats, breed-standard grooming or upcoming hygiene care? {entreprise} takes care of your pet with professional, gentle, and guaranteed techniques.",
+    "photo": "vehicule.jpg"
+  },
+  "trustbar": {
+    "items": [
+      { "iconKey": "Award", "label": "Certified and trained groomer" },
+      { "iconKey": "ShieldCheck", "label": "Full professional insurance" },
+      { "iconKey": "Clock", "label": "Well-being and gentleness guaranteed" }
+    ]
+  },
+  "pourquoi": {
+    "title": "Why choose us for grooming?",
+    "primary": "A serene companion, without fear of the next appointment.",
+    "secondary": "A neglected coat or stubborn mats is more than a nuisance: it's a risk to your pet's skin health. We step in to restore comfort, hygiene, and well-being to your companion through adapted bathing and drying, and early detection of skin issues.",
+    "cartes": [
+      {
+        "iconKey": "PlugZap",
+        "title": "Mats and tangled coats",
+        "text": "Gentle detangling, adapted brushing, and specific baths to restore coat health and beauty without stress."
+      },
+      {
+        "iconKey": "ShieldCheck",
+        "title": "Breed-standard grooming",
+        "text": "Professional clipping and scissor finishing strictly respecting breed standards and your dog's morphology."
+      },
+      {
+        "iconKey": "Lightbulb",
+        "title": "Hygiene and annex care",
+        "text": "Nail trimming, ear cleaning, anal gland expression, and skin issue detection for overall health."
+      }
+    ]
+  },
+  "processus": {
+    "title": "Our grooming process",
+    "primary": "Simple, transparent, and stress-free: we read your pet's body language to adapt our handling.",
+    "cartes": [
+      {
+        "num": "01",
+        "title": "Benevolent assessment",
+        "text": "Analysis of your companion's coat, skin, and temperament to define the most adapted care."
+      },
+      {
+        "num": "02",
+        "title": "Clear and personalized quote",
+        "text": "Detailed pricing based on breed, size, and coat condition, explained transparently before care begins."
+      },
+      {
+        "num": "03",
+        "title": "Gentle grooming",
+        "text": "Care delivered with patience, gentle handling, and stress management, so your pet leaves clean and soothed."
+      }
+    ]
+  },
+  "realisations": {
+    "title": "Our transformations",
+    "primary": "Results that speak for themselves.",
+    "cartes": [
+      { "srcKey": "realisation_1.jpg", "title": "Before/After", "location": "Tonneins" },
+      { "srcKey": "realisation_2.jpg", "title": "First grooming for Bianca", "location": "Marmande" },
+      { "srcKey": "realisation_3.jpg", "title": "We'll be all clean after", "location": "Bouglon" }
+    ]
+  },
+  "temoignages": {
+    "title": "Testimonials",
+    "primary": "They trusted us with their pets.",
+    "cartes": [
+      { "name": "Mathias Ostanel", "date": "January 2024", "text": "Grooming of our dog with great gentleness, very clean work and respectful of his stress. Impeccable result!" },
+      { "name": "Elysa Thomas", "date": "January 2024", "text": "Unmatched responsiveness and availability. Kind and very professional groomer, my dog came out soothed and beautiful." },
+      { "name": "Julie Martet", "date": "March 2024", "text": "Responsive and professional groomer. The work is neat, the advice for coat maintenance is valuable. I recommend." },
+      { "name": "Clara Navail", "date": "December 2024", "text": "Wonderful experience, serious work, friendly person, quick and painless detangling! A true passionate, everything was top!" },
+      { "name": "Jean Corentin", "date": "May 2025", "text": "A true professional! Always takes the time to explain care after grooming. Clean work, spotless, my dog loves going there. Highly recommend!" },
+      { "name": "Ivoa Bille", "date": "October 2025", "text": "Probably the best groomer we've had the chance to work with. Very responsive, organized, thoughtful, good advice for the coat, efficient and more..." }
+    ]
+  },
+  "faq": {
+    "title": "FAQ",
+    "primary": "Your questions, our answers.",
+    "secondary": "Can't find your answer? Call us, we will always take the time to respond and reassure your pet.",
+    "questions": [
+      {
+        "question": "Do you serve all of Lot-et-Garonne?",
+        "answer": "We welcome your companions in our mobile unit and cover all of Lot-et-Garonne."
+      },
+      {
+        "question": "Is the grooming quote really free?",
+        "answer": "Absolutely. We freely assess your pet's coat condition and needs to provide you with a detailed, no-obligation quote."
+      },
+      {
+        "question": "How do you handle stressed or anxious dogs?",
+        "answer": "Stress management is our priority. We use gentle handling techniques, take breaks if needed, and read your pet's body language to guarantee a positive, trauma-free experience."
+      },
+      {
+        "question": "Are annex care services (nails, ears, anal glands) included?",
+        "answer": "Yes, our full grooming packages systematically include ear cleaning, nail trimming, and anal gland expression, performed with delicacy and hygiene."
+      }
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "navigation": {
+    "labels": [
+      { "bouton": "Accueil", "to": "/" },
+      { "bouton": "Services", "to": "/services" },
+      { "bouton": "A propos", "to": "/about" },
+      { "bouton": "Contact", "to": "/contact" },
+      { "bouton": "Rendez-vous", "to": "/rendez-vous" }
+    ],
+    "cta": { "bouton": "Devis gratuit", "to": "/contact" }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "hero": {
+    "primary": "Le toilettage, un métier de confiance et de douceur.",
+    "secondary": "{entreprise}, c'est avant tout l'histoire d'une toiletteuse passionnée par son métier, attachée à sa région et déterminée à offrir à chaque animal le meilleur rapport qualité-prix en matière de soins."
+  },
+  "histoire": {
+    "primary": "Notre histoire",
+    "secondary": "Fondée en septembre 2016 par {nom}, une toiletteuse canine depuis plus de 10 ans, {entreprise} a grandi au rythme des rendez-vous et de la confiance des maîtres. Aujourd'hui, l'entreprise est reconnue dans tout le Lot-et-Garonne pour la qualité de ses soins. Nous croyons qu'un bon toilettage se voit à peine, mais se sent au quotidien : confort, pelage soyeux, animal apaisé. C'est cette excellence douce que nous offrons à chaque compagnon.",
+    "cartes": [
+      {
+        "iconKey": "ShieldCheck",
+        "title": "Bien-être et douceur",
+        "text": "Lecture attentive du langage corporel et contention douce pour une gestion du stress optimale de votre compagnon."
+      },
+      {
+        "iconKey": "Heart",
+        "title": "Expertise du pelage",
+        "text": "Brossage, démêlage, bain et séchage adaptés, tonte et finitions aux ciseaux respectant scrupuleusement les standards de race."
+      },
+      {
+        "iconKey": "Users",
+        "title": "Soins annexes complets",
+        "text": "Entretien des griffes, nettoyage des oreilles, vidange des glandes anales et repérage précoce des éventuels problèmes cutanés."
+      },
+      {
+        "iconKey": "CheckCircle2",
+        "title": "Confiance et proximité",
+        "text": "Une toiletteuse passionnée, basée en Lot-et-Garonne, qui traite chaque animal avec le plus grand respect et bienveillance."
+      }
+    ]
+  },
+  "metriques": {
+    "cartes": [
+      {
+        "valeur": "10+",
+        "title": "années d'expérience"
+      },
+      {
+        "valeur": "200+",
+        "title": "compagnons toilettés"
+      },
+      {
+        "valeur": "98%",
+        "title": "de maîtres satisfaits"
+      },
+      {
+        "valeur": "48h",
+        "title": "pour un devis personnalisé"
+      }
+    ]
+  }
+}

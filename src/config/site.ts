@@ -1,0 +1,32 @@
+// src/config/site.ts
+export const siteConfig = {
+  entreprise: "101 POILS",
+  urlSite: "https://101poils.com",
+  nom: "Sylvie Pochet",
+  siret: "82254894700024",
+  adresse: "119 route de Poussignac 47250 ARGENTON",
+  email: "sylvie.dupontpochet@gmail.com",
+  phoneNumber: "06 12 39 90 15",
+  phoneLink: "+33612399015",
+  facebookLink: "https://www.facebook.com/sansunpoil",
+  instagramLink: "https://instagram.com/",
+  linkedinLink: "https://www.linkedin.com/",
+  headDescriptionRoot: "101 poils erreur 404 : page introuvable. Retournez à l'accueil pour découvrir nos services de toilettage en Lot-et-Garonne.",
+  headDescriptionHome: "Toiletteuse professionnelle en Lot-et-Garonne : brossage, démêlage, bain, tonte, finitions aux ciseaux et soins annexes. Devis gratuit sous 48h.",
+  headDescriptionAbout: "Découvrez notre entreprise de toilettage en Lot-et-Garonne : 10 ans d'expérience, gestion du stress et contention douce. Spécialiste du soin du pelage.",
+  headDescriptionServices: "Services de toilettage en Lot-et-Garonne : brossage, bain adapté, tonte selon les standards de race, soins annexes, familiarisation, conseils.",
+  headDescriptionContact: "Contactez notre toiletteuse en Lot-et-Garonne pour un devis gratuit ou prendre rendez-vous pour votre compagnon.",
+  headDescriptionBooking: "Prenez rendez-vous auprès de notre toiletteuse. Confirmation immédiate par email.",
+  };
+  
+export const siteStyle = {
+  titreSectionBleuStyle: "text-sm font-semibold uppercase",
+  ligne1SectionBleuStyle: "text-xl font-bold mt-4 md:text-2xl",
+  ligne2SectionBleuStyle: "text-base mt-4 md:text-xl",
+  titreSectionBlancStyle: "text-sm font-semibold uppercase",
+  ligne1SectionBlancStyle: "text-xl font-bold mt-4 md:text-2xl",
+  ligne2SectionBlancStyle: "text-base mt-4 md:text-xl",
+  titreVignetteStyle: "text-lg mt-4 font-semibold",
+  ligne1VignetteStyle: "text-sm mt-2 text-muted-foreground",
+  boutonStyle: "rounded-xl py-2 px-4 text-sm font-semibold text-center text-accent-foreground bg-accent tracking-wider transition hover:opacity-80"
+  };

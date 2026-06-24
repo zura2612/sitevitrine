@@ -1,0 +1,23 @@
+# dépendances
+node_modules/
+worker/node_modules/
+
+# build et outputs
+dist/
+dist-ssr/
+.output/
+
+# environnement
+.env
+.env.*
+!.env.example
+.dev.vars
+
+# caches et outils locaux
+.nitro/
+.tanstack/
+.vite/
+.vscode/
+.wrangler/
+.vercel/
+

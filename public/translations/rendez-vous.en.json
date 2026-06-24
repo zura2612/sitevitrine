@@ -1,0 +1,65 @@
+{
+  "hero": {
+    "primary": "Book an appointment",
+    "secondary": "Choose the type of appointment that suits you, then select a time slot."
+  },
+  "events": {
+    "sectionTitle": "Choose your appointment type",
+    "sectionSubtitle": "Select the service that best fits your needs. You will then be able to choose a time slot.",
+    "event30min": {
+      "iconKey": "",
+      "title": "30-minute discovery session",
+      "description": "Introduction / Grooming / Consultation"
+    },
+    "event60min": {
+      "iconKey": "",
+      "title": "60-minute session",
+      "description": "Brushing + Additional services"
+    },
+    "event90min": {
+      "iconKey": "",
+      "title": "90-minute session",
+      "description": "Bath + Brushing + Additional services"
+    },
+    "beforePrice": "travel fees not included\nprice:  ",
+    "price": "Price",
+    "free": "Free",
+    "duration": "min",
+    "selectButton": "Select",
+    "selected": "✓ Selected"
+  },
+  "info": {
+    "primary": "Practical information",
+    "secondary": "Everything you need to know about booking an appointment.",
+    "cartes": [
+      {
+        "iconKey": "Mail",
+        "title": "Email confirmation",
+        "text": "You will receive an email with all the details and a link to modify or cancel."
+      },
+      {
+        "iconKey": "RefreshCw",
+        "title": "Free cancellation",
+        "text": "You can cancel or reschedule your appointment at any time via the link in the email."
+      },
+      {
+        "iconKey": "Globe",
+        "title": "Time zone",
+        "text": "Available time slots are displayed in your local time zone, automatically detected."
+      }
+    ]
+  },
+  "confirmation": {
+    "title": "Appointment confirmed!",
+    "message": "Your appointment [{eventType}] is scheduled for {date}.",
+    "emailSent": "A confirmation email has been sent to {email}. It will be visible in two or three minutes.",
+    "newBooking": "Book another appointment",
+    "goHome": "Back to home"
+  },
+  "annulation": {
+    "message": "Your appointment has been cancelled. You can book a new one below."
+  },
+  "chargement": "Loading available time slots...",
+  "erreur": "Unable to load the calendar.",
+  "reessayer": "Try again"
+}

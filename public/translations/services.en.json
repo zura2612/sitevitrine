@@ -1,0 +1,46 @@
+{
+  "hero": {
+    "primary": "Comprehensive and adapted care, for the well-being of every pet.",
+    "secondary": "From simple detangling to full grooming according to breed standards, we put all our expertise and gentleness at the service of your companion's comfort and health."
+  },
+  "services": {
+    "cartes": [
+      {
+        "iconKey": "Scissors",
+        "title": "Clipping",
+        "text": "Clipping and scissor finishing strictly respecting the morphological standards of your breed.",
+        "bouton": "Request a free quote"
+      },
+      {
+        "iconKey": "Brush",
+        "title": "Brushing",
+        "text": "Gentle treatment of stubborn mats and tangles, with brushing techniques that preserve the skin and comfort of the animal.",
+        "bouton": "Request a free quote"
+      },
+      {
+        "iconKey": "Heart",
+        "title": "Annex care",
+        "text": "Nail trimming, ear cleaning, anal gland expression, and early detection of potential skin problems during handling.",
+        "bouton": "Request a free quote"
+      },
+      {
+        "iconKey": "Baby",
+        "title": "Familiarization",
+        "text": "First appointments dedicated to gentle habituation to handling, dryer noise, and the grooming table for future serene adults.",
+        "bouton": "Request a free quote"
+      },
+      {
+        "iconKey": "Droplet",
+        "title": "Bath",
+        "text": "Use of specific shampoos (hypoallergenic, antiparasitic, or moisturizing) adapted to the particular dermatological needs of your animal.",
+        "bouton": "Request a free quote"
+      },
+      {
+        "iconKey": "CheckCircle2",
+        "title": "Advice",
+        "text": "Detailed explanations of the care provided and personalized recommendations to maintain the coat and hygiene in perfect condition between appointments.",
+        "bouton": "Request a free quote"
+      }
+    ]
+  }
+}

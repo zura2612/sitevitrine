@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "secondary": "Describe your pet's needs to us, and we will call you back promptly with initial advice and a free quote.",
+    "primary": "Let's talk about your pet's needs."
+  },
+  "formulaire": {
+    "confidentialite": "Your data and your pet's information remain confidential and are only used to process your request.",
+    "telephone": "Your phone number",
+    "champ": "* required field",
+    "bouton": "Send request",
+    "message": "Your message *",
+    "message_suggestion": "Please specify your address, your pet's name, breed, and age, etc...",
+    "message_tooltip": "Please fill in this field.",
+    "projet": "Type of care",
+    "email": "Your email *",
+    "identite": "First & last name *"
+  },
+  "toast": {
+  "succes": "Request sent! We will get back to you within 48 hours at the latest.",
+  "erreur_resend": "Error sending request. We apologize. Please send us an email directly.",
+  "erreur_reseau": "Network error. The request could not be sent. Please check your internet connection."
+  },
+  "projets": {
+    "defaut": "Other (please specify)",
+    "labels": [
+      { "option": "Brushing" },
+      { "option": "Bath" },
+      { "option": "Clipping" },
+      { "option": "Annex care" },
+      { "option": "Familiarization" },
+      { "option": "Advice" },
+      { "option": "Other" }
+    ]
+  }
+}

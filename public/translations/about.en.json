@@ -1,0 +1,52 @@
+{
+  "hero": {
+    "primary": "Grooming, a trusted and gentle trade.",
+    "secondary": "{entreprise} is above all the story of a passionate dog groomer dedicated to animal welfare, rooted in the region, and determined to offer every pet the best care-to-price ratio."
+  },
+  "histoire": {
+    "primary": "Our Story",
+    "secondary": "Founded in September 2016 by {nom}, a dog groomer with over 10 years of experience, {entreprise} has grown alongside its appointments and the trust of pet owners. Today, the enterprise is recognized throughout Lot-et-Garonne for the quality of its care. We believe that good grooming is barely visible, but felt every day: comfort, silky coat, a soothed animal. That's the gentle excellence we offer every pet.",
+    "cartes": [
+      {
+        "iconKey": "ShieldCheck",
+        "title": "Well-being and gentleness",
+        "text": "Attentive reading of body language and gentle handling for optimal stress management of your companion."
+      },
+      {
+        "iconKey": "Heart",
+        "title": "Coat expertise",
+        "text": "Brushing, detangling, bath and drying adapted to coat type, clipping and scissor finishing strictly respecting breed standards."
+      },
+      {
+        "iconKey": "Users",
+        "title": "Complete annex care",
+        "text": "Nail trimming, ear cleaning, anal gland expression and early detection of potential skin problems."
+      },
+      {
+        "iconKey": "CheckCircle2",
+        "title": "Trust and proximity",
+        "text": "A passionate groomer, based in Lot-et-Garonne, who treats every animal with the greatest respect and kindness."
+      }
+    ]
+  },
+  "metriques": {
+    "cartes": [
+      {
+        "valeur": "10+",
+        "title": "years of experience"
+      },
+      {
+        "valeur": "200+",
+        "title": "pets groomed"
+      },
+      {
+        "valeur": "98%",
+        "title": "satisfied owners"
+      },
+      {
+        "valeur": "48h",
+        "title": "for a personalized quote"
+      }
+    ]
+  }
+}
