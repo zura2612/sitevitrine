@@ -50,9 +50,9 @@
     ]
   },
   "confirmation": {
-    "title": "Appointment confirmed!",
-    "message": "Your appointment [{eventType}] is scheduled for {date}.",
-    "emailSent": "A confirmation email has been sent to {email}. It will be visible in two or three minutes.",
+    "title": "Appointment booking sent!",
+    "message": "[{eventType}] scheduled for {date}.",
+    "emailSent": "An email [Pending validation] has been sent to the address {email}. It will appear in two or three minutes.",
     "newBooking": "Book another appointment",
     "goHome": "Back to home"
   },

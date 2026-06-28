@@ -114,19 +114,22 @@
     /* forwards = garde l'état final (dernière couleur) */
   }
 
-  @keyframes size-pulse {
+  /*@keyframes size-pulse {
     0%, 100% { transform: scale(1); }
     50%      { transform: scale(1.1); }
-  }
+  }*/
 
   @keyframes color-cycle {
-    0%    { color: #ff0000; transform: scale(1);}   /* rouge */
-    16%   { color: #ff6600; transform: scale(1.2);} /* orange */
-    32%   { color: #ffcc00; transform: scale(1);}   /* jaune */
-    48%   { color: #33ff00; transform: scale(1.2);} /* vert */
-    64%   { color: #0099ff; transform: scale(1);}   /* bleu */
-    80%   { color: #6600ff; transform: scale(1.2);} /* violet */
-    100%  { color: #ff0000; transform: scale(1);}   /* Retour au rouge final + taille normale*/
+    0%    { color: var(--foreground); transform: scale(1);}
+    10%    { color: #ffe4e6; transform: scale(1.05);} /* rose */
+    21%    { color: #ff0000; transform: scale(1.1);}  /* rouge */ 
+    32%   { color: #ff6600; transform: scale(1.15);} /* orange */
+    45%   { color: #ffcc00; transform: scale(1.2);}  /* jaune */
+    57%   { color: #33ff00; transform: scale(1.2);}  /* vert */
+    68%   { color: #b3d9ff; transform: scale(1.15);} /* bleu clair */
+    79%   { color: #1a5cff; transform: scale(1.1);}  /* bleu foncé */
+    90%   { color: #6600ff; transform: scale(1.05);} /* violet */
+    100%  { color: var(--foreground); transform: scale(1);}   /* Retour taille normale*/
   }
 }
 

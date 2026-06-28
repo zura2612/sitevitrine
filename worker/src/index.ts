@@ -1,3 +1,4 @@
+// fichier worker/src/index.ts
 export interface Env {
   RESEND_API_KEY: string;
   TO_EMAIL: string;
@@ -48,13 +49,13 @@ export default {
         body: JSON.stringify({
           from: "Site Web <onboarding@resend.dev>", // Laisse onboarding au début, tu changeras après validation DNS
           to: [env.TO_EMAIL], // Ton adresse e-mail de réception
-          subject: `✨ Nouvelle demande de projet : ${project}`,
+          subject: `✨ Nouvelle demande de contact sur le service : ${project}`,
           html: `
-            <h3>Nouvelle demande de contact</h3>
-            <p><strong>Nom / Prénom :</strong> ${prenomNom}</p>
-            <p><strong>E-mail :</strong> ${courriel}</p>
+            <h3>Demande de contact</h3>
+            <p><strong>Prénom Nom:</strong> ${prenomNom}</p>
+            <p><strong>EMAIL :</strong> ${courriel}</p>
             <p><strong>Téléphone :</strong> ${phone || "Non renseigné"}</p>
-            <p><strong>Type de projet :</strong> ${project}</p>
+            <p><strong>Type de service :</strong> ${project}</p>
             <p><strong>Message :</strong></p>
             <p style="white-space: pre-wrap;">${message}</p>
           `,

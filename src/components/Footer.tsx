@@ -1,5 +1,5 @@
 // fichier src/components/Footer.tsx
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Zap } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail, MapPin } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePageTranslations } from "@/hooks/usePageTranslations";
 import type { FooterTranslations } from "@/types/translations";
@@ -40,9 +40,10 @@ export function Footer() {
           {/* Zone Entreprise */}
           <div className="md:col-span-2 flex flex-col">
             <div className="flex items-center gap-2 font-bold">
-              <span className="grid h-9 w-9 place-items-center rounded-full bg-primary text-primary-foreground">
-                <Zap className="h-4 w-4" />
-              </span>
+              {/*<span className="grid h-9 w-9 place-items-center rounded-full bg-primary text-primary-foreground">
+                <Zap className="h-4 w-4" /></span>*/}
+              <img src="/favicon.ico" alt={`Logo ${siteConfig.entreprise}`} width={32} height={32}
+                className="h-7 w-7 rounded-full object-cover"/>
               {siteConfig.entreprise}
               <span className="text-sm font-normal">siret {siteConfig.siret}</span>
             </div>

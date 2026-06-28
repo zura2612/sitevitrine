@@ -17,6 +17,7 @@
     "deploy:vercel": "vercel deploy --prod"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.19.0",
     "@calcom/embed-react": "^1.5.3",
     "@cloudflare/vite-plugin": "^1.40.0",
     "@radix-ui/react-accordion": "^1.2.12",

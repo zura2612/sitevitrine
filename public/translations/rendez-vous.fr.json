@@ -50,9 +50,9 @@
     ]
   },
   "confirmation": {
-    "title": "Rendez-vous confirmé !",
-    "message": "Votre rendez-vous [{eventType}] est prévu pour le {date}.",
-    "emailSent": "Un email de confirmation a été envoyé à {email}. Visible dans deux ou trois minutes.",
+    "title": "Réservation de rendez-vous envoyée !",
+    "message": "[{eventType}] prévu pour le {date}.",
+    "emailSent": "Un email [En attente de validation] a été envoyé à l'adresse {email}. Visible dans deux ou trois minutes.",
     "newBooking": "Prendre un autre rendez-vous",
     "goHome": "Retour à l'accueil"
   },

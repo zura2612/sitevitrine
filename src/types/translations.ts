@@ -100,8 +100,22 @@ export interface CtaBandTranslations {
 // pour function Header()
 export interface HeaderTranslations {
   navigation: {
-    labels: Array<{ bouton: string; to: string }>;
+    labels: Array<{ bouton: string; to: string;
+      requiresAuth?: boolean; lockedMessage?: string; ariaLabelLocked?: string; }>;
     cta: { bouton: string; to: string };
+  };
+
+  tooltips: {
+    themeLight: string;
+    themeDark: string;
+    login: string;
+    logout: string;
+    loading: string;
+  };
+  mobileSections: {
+    language: string;
+    display: string;
+    account: string;
   };
 }
 

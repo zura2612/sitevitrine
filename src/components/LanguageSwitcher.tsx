@@ -3,7 +3,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 export function LanguageSwitcher() {
   const { lang, toggleLang } = useLanguage();
-  //const label = `Passer à la langue ${lang === "fr" ? "anglaise" : "française"}`
   // Définition dynamique du label selon la langue ciblée par le bouton
   const label = lang === "fr" ? "Switch to English" : "Passer en français";
     

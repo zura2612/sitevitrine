@@ -15,8 +15,8 @@ Site vitrine professionnel avec système de prise de rendez-vous intégré via C
 
 ```bash
 # Cloner le dépôt
-git clone https://github.com/TON_USERNAME/NOM_DU_REPO.git
-cd NOM_DU_REPO
+git clone https://github.com/zura2612/sitevitrine.git
+cd sitevitrine
 
 # Installer les dépendances
 pnpm install

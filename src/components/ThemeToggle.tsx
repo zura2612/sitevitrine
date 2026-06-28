@@ -4,18 +4,21 @@ import { Sun, Moon } from 'lucide-react'
 
 type ThemeMode = 'light' | 'dark'
 
+interface ThemeToggleProps {
+  labels?: {
+    light: string;
+    dark: string;
+  };
+}
+
 function getInitialMode(): ThemeMode {
   if (typeof window === 'undefined') {
     return 'light'
   }
-
-// Si l'utilisateur est déjà venu et a choisi un thème, on le reprend
   const stored = window.localStorage.getItem('theme')
-  if (stored === 'light' || stored === 'dark' ) {
+  if (stored === 'light' || stored === 'dark') {
     return stored
   }
-
-  // S'il n'y a pas d'historique, on regarde la préférence du système (Windows/Mac/Linux)
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
   return prefersDark ? 'dark' : 'light'
 }
@@ -28,9 +31,16 @@ function applyThemeMode(mode: ThemeMode) {
   document.documentElement.style.colorScheme = mode
 }
 
-export function ThemeToggle() {
-  // On initialise avec une valeur temporaire safe pour le SSR
+export function ThemeToggle({ labels }: ThemeToggleProps) {
   const [mode, setMode] = useState<ThemeMode>('light')
+
+  // Fallback sur les labels français si les props ne sont pas fournies
+  const defaultLabels = {
+    light: 'Passer au thème sombre',
+    dark: 'Passer au thème clair'
+  }
+  
+  const t = labels ?? defaultLabels
 
   useEffect(() => {
     const initialMode = getInitialMode()
@@ -38,7 +48,6 @@ export function ThemeToggle() {
     applyThemeMode(initialMode)
   }, [])
 
-  
   function toggleMode() {
     const nextMode: ThemeMode = mode === 'light' ? 'dark' : 'light'
     setMode(nextMode)
@@ -46,21 +55,17 @@ export function ThemeToggle() {
     window.localStorage.setItem('theme', nextMode)
   }
 
-  const label = `Passer au thème ${mode === 'light' ? 'sombre' : 'clair'}`
+  // Utiliser le label approprié selon le thème actuel
+  const label = mode === 'light' ? t.light : t.dark
+
   return (
     <button
       type="button"
       onClick={toggleMode}
       aria-label={label}
       title={label}
-      // "pointer-events-auto" et "isolate" pour garantir la capture du survol
-      className="relative grid h-9 w-9 place-items-center rounded-full hover:bg-accent
-      transition pointer-events-auto isolate"
+      className="relative grid h-9 w-9 place-items-center rounded-full hover:bg-accent transition pointer-events-auto isolate"
     >
-      {/* On ajoute "pointer-events-none" sur les icônes pour que la souris traverse l'image 
-        et cible directement le bouton entier */}
-      {/* {mode === 'dark' ? 'Sombre' : 'Clair'} */}
-      {/* Afficher l'icône correspondante avec une taille contrôlée */}
       {mode === 'dark' ? (
         <Sun className="h-4 w-4 text-amber-500 pointer-events-none" />
       ) : (

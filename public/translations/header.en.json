@@ -5,8 +5,23 @@
       { "bouton": "Services", "to": "/services" },
       { "bouton": "About", "to": "/about" },
       { "bouton": "Contact", "to": "/contact" },
-      { "bouton": "Appointment", "to": "/rendez-vous" }
+      { "bouton": "Appointment", "to": "/rendez-vous", "requiresAuth": true,
+          "lockedMessage": "Please log in to access this page.",
+          "ariaLabelLocked": "Appointment, login required" }
     ],
     "cta": { "bouton": "Free quote", "to": "/contact" }
+  },
+
+  "tooltips": {
+    "themeLight": "Switch to dark mode",
+    "themeDark": "Switch to light mode",
+    "login": "Log in",
+    "logout": "Log out",
+    "loading": "Loading..."
+  },
+  "mobileSections": {
+    "language": "Language",
+    "display": "Display",
+    "account": "Account"
   }
 }

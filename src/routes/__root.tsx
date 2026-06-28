@@ -1,11 +1,13 @@
 // fichier src/routes/__root.tsx
-import { HeadContent, Scripts, createRootRoute, Link } from '@tanstack/react-router'
-import { useEffect } from 'react'
-import type { ReactNode } from 'react'
-import { Footer } from '../components/Footer'
-import { Header } from  '../components/Header'
-import { LanguageProvider, useLanguage } from '../contexts/LanguageContext'
-import { preloadAllTranslations } from "../hooks/usePageTranslations"
+import { HeadContent, Scripts, createRootRoute, Link } from '@tanstack/react-router';
+import { useEffect } from 'react';
+import type { ReactNode } from 'react';
+import { Footer } from '../components/Footer';
+import { Header } from  '../components/Header';
+import { Auth0Wrapper } from '../components/Auth0Wrapper';
+//import { auth0Config } from '../auth/auth0-config';
+import { LanguageProvider, useLanguage } from '../contexts/LanguageContext';
+import { preloadAllTranslations } from "../hooks/usePageTranslations";
 
 import appCss from '../styles.css?url'
 
@@ -49,13 +51,13 @@ export const Route = createRootRoute({
     ],
     links: [
       { rel: 'stylesheet', href: appCss },
+      { rel: 'icon', href: '../public/favicon.ico' },
     ],
   }),
   shellComponent: RootDocument,
   notFoundComponent: NotFoundComponent,
 })
 
-//function RootDocument({ children }: { children: React.ReactNode }) {
   function RootDocument({ children }: { children: ReactNode }) {
   // Le preload des traductions ne doit s'executer que cote client (apres hydratation).
   // useEffect ne s'execute jamais cote serveur / Cloudflare Workers,
@@ -67,12 +69,14 @@ export const Route = createRootRoute({
         <HeadContent />
       </head>
       <body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-[rgba(79,184,178,0.24)]">
-     <LanguageProvider>
-        <Header />
-        {children}
-        <Footer />
-        <Scripts />
-     </LanguageProvider>
+        <Auth0Wrapper>
+   	      <LanguageProvider>
+     	      <Header />
+     	      {children}
+            <Footer />
+     	      <Scripts />
+          </LanguageProvider>
+        </Auth0Wrapper>
       </body>
     </html>
   )

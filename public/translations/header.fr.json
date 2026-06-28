@@ -5,8 +5,23 @@
       { "bouton": "Services", "to": "/services" },
       { "bouton": "A propos", "to": "/about" },
       { "bouton": "Contact", "to": "/contact" },
-      { "bouton": "Rendez-vous", "to": "/rendez-vous" }
+      { "bouton": "Rendez-vous", "to": "/rendez-vous", "requiresAuth": true,
+          "lockedMessage": "Connectez-vous pour accéder à cette page.",
+          "ariaLabelLocked": "Rendez-vous, connexion requise" }
     ],
     "cta": { "bouton": "Devis gratuit", "to": "/contact" }
+  },
+
+  "tooltips": {
+    "themeLight": "Passer au thème sombre",
+    "themeDark": "Passer au thème clair",
+    "login": "Se connecter",
+    "logout": "Se déconnecter",
+    "loading": "Chargement..."
+  },
+  "mobileSections": {
+    "language": "Langue",
+    "display": "Affichage",
+    "account": "Compte"
   }
 }
