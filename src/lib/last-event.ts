@@ -1,4 +1,6 @@
-const LAST_EVENT_KEY = "lastSelectedEvent";
+// fichier src/lib/last-event.ts
+import { LAST_EVENT_KEY } from "@/lib/storage-keys"; // localStorage
+//const LAST_EVENT_KEY = "lastSelectedEvent";
 
 /**
  * Récupère l'identifiant du dernier événement sélectionné.

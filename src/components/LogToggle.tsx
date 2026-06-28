@@ -1,9 +1,11 @@
 // fichier src/components/LogToggle.tsx
-import { useAuth0 } from '@auth0/auth0-react';
-import { User, UserCheck } from 'lucide-react';
+import { useAuth0 } from "@auth0/auth0-react";
+import { LogIn, LogOut, Loader2 } from "lucide-react";
+import { clearLastSelectedEvent } from "@/lib/last-event";
+import { BOOKING_STORAGE_KEY } from "@/lib/storage-keys"; // ✅ Import centralisé
 
 interface LogToggleProps {
-  labels?: {
+  labels: {
     login: string;
     logout: string;
     loading: string;
@@ -13,51 +15,63 @@ interface LogToggleProps {
 export function LogToggle({ labels }: LogToggleProps) {
   const { loginWithRedirect, logout, isAuthenticated, isLoading } = useAuth0();
 
-  // Fallback sur les labels français si les props ne sont pas fournies
-  const defaultLabels = {
-    login: 'Se connecter',
-    logout: 'Se déconnecter',
-    loading: 'Chargement...'
+  const handleLogin = () => {
+    loginWithRedirect();
   };
-  
-  const t = labels ?? defaultLabels;
+
+  const handleLogout = () => {
+    // ✅ NOUVEAU: Nettoyer toutes les données persistantes liées à l'utilisateur
+    clearLastSelectedEvent(); // Nettoie localStorage
+    
+    // ✅ NOUVEAU: Nettoyer sessionStorage (réservations en cours)
+    // On cible spécifiquement la clé utilisée dans rendez-vous.tsx
+    try {
+      sessionStorage.removeItem(BOOKING_STORAGE_KEY);
+    } catch (error) {
+      console.warn("Failed to clear sessionStorage:", error);
+    }
+
+    logout({
+      logoutParams: {
+        returnTo: window.location.origin
+      }
+    });
+  };
 
   if (isLoading) {
     return (
       <button
-        type="button"
-        aria-label={t.loading}
-        title={t.loading}
-        className="relative grid h-9 w-9 place-items-center rounded-full hover:bg-accent transition pointer-events-auto isolate"
+        disabled
+        className="rounded-xl px-4 py-2 text-sm font-semibold opacity-50 cursor-not-allowed flex items-center gap-2"
+        aria-label={labels.loading}
       >
-        <User className="h-4 w-4 text-muted-foreground pointer-events-none" />
+        <Loader2 className="h-4 w-4 animate-spin" />
+        <span>{labels.loading}</span>
       </button>
     );
   }
 
-  const label = isAuthenticated ? t.logout : t.login;
+  if (isAuthenticated) {
+    return (
+      <button
+        onClick={handleLogout}
+        className="rounded-xl px-4 py-2 text-sm font-semibold hover:opacity-80 flex items-center gap-2"
+        aria-label={labels.logout}
+      >
+        <LogOut className="h-4 w-4" />
+        <span>{labels.logout}</span>
+      </button>
+    );
+  }
 
   return (
     <button
-      type="button"
-      onClick={() =>
-        isAuthenticated
-          ? logout({ logoutParams: { returnTo: window.location.origin } })
-          : loginWithRedirect()
-      }
-      aria-label={label}
-      title={label}
-      className={`relative grid h-9 w-9 place-items-center rounded-full transition pointer-events-auto isolate ${
-        isAuthenticated
-          ? 'bg-green-500/10 hover:bg-green-500/20'
-          : 'hover:bg-accent'
-      }`}
+      onClick={handleLogin}
+      className="rounded-xl px-4 py-2 text-sm font-semibold hover:opacity-80 flex items-center gap-2"
+      aria-label={labels.login}
     >
-      {isAuthenticated ? (
-        <UserCheck className="h-4 w-4 text-green-500 pointer-events-none" />
-      ) : (
-        <User className="h-4 w-4 text-slate-700 pointer-events-none" />
-      )}
+      <LogIn className="h-4 w-4" />
+      <span>{labels.login}</span>
     </button>
   );
 }

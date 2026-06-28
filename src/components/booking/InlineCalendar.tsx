@@ -1,3 +1,4 @@
+// fichier src/components/booking/InlineCalendar.tsx
 import { useEffect, useRef, useState } from "react";
 import { getCalInstance } from "@/lib/cal";
 import { useCalEvents } from "@/hooks/useCalEvents";

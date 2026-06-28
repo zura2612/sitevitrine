@@ -49,6 +49,11 @@
       }
     ]
   },
+  "auth": {
+    "title": "Connexion requise",
+    "message": "Vous devez être connecté pour prendre un rendez-vous.",
+    "button": "Retour à l'accueil"
+  },
   "confirmation": {
     "title": "Réservation de rendez-vous envoyée !",
     "message": "[{eventType}] prévu pour le {date}.",

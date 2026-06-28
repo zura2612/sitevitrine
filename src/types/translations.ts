@@ -54,15 +54,7 @@ export interface BookingTranslations {
     primary: string;
     secondary: string;
   };
-  info: {
-    primary: string;
-    secondary: string;
-    cartes: Array<{
-      iconKey: string;
-      title: string;
-      text: string;
-    }>;
-  };
+
   events: {
     sectionTitle: string;
     sectionSubtitle: string;
@@ -76,6 +68,23 @@ export interface BookingTranslations {
     event60min: { iconKey: string; title: string; description: string; };
     event90min: { iconKey: string; title: string; description: string; };
   };
+
+  info: {
+    primary: string;
+    secondary: string;
+    cartes: Array<{
+      iconKey: string;
+      title: string;
+      text: string;
+    }>;
+  };
+
+  auth: {
+    title: string;
+    message: string;
+    button: string
+  };
+
   confirmation: {
     title: string;
     message: string;
@@ -83,9 +92,11 @@ export interface BookingTranslations {
     newBooking: string;
     goHome: string;
   };
+
   annulation: {
     message: string;
   };
+
   chargement: string;
   erreur: string;
   reessayer: string;

@@ -10,19 +10,15 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ServicesRouteImport } from './routes/services'
-import { Route as RendezVousRouteImport } from './routes/rendez-vous'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as ProtectedRouteImport } from './routes/_protected'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProtectedRendezVousRouteImport } from './routes/_protected/rendez-vous'
 
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RendezVousRoute = RendezVousRouteImport.update({
-  id: '/rendez-vous',
-  path: '/rendez-vous',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -35,47 +31,64 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProtectedRoute = ProtectedRouteImport.update({
+  id: '/_protected',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const ProtectedRendezVousRoute = ProtectedRendezVousRouteImport.update({
+  id: '/rendez-vous',
+  path: '/rendez-vous',
+  getParentRoute: () => ProtectedRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/rendez-vous': typeof RendezVousRoute
   '/services': typeof ServicesRoute
+  '/rendez-vous': typeof ProtectedRendezVousRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/rendez-vous': typeof RendezVousRoute
   '/services': typeof ServicesRoute
+  '/rendez-vous': typeof ProtectedRendezVousRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_protected': typeof ProtectedRouteWithChildren
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/rendez-vous': typeof RendezVousRoute
   '/services': typeof ServicesRoute
+  '/_protected/rendez-vous': typeof ProtectedRendezVousRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/contact' | '/rendez-vous' | '/services'
+  fullPaths: '/' | '/about' | '/contact' | '/services' | '/rendez-vous'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/rendez-vous' | '/services'
-  id: '__root__' | '/' | '/about' | '/contact' | '/rendez-vous' | '/services'
+  to: '/' | '/about' | '/contact' | '/services' | '/rendez-vous'
+  id:
+    | '__root__'
+    | '/'
+    | '/_protected'
+    | '/about'
+    | '/contact'
+    | '/services'
+    | '/_protected/rendez-vous'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProtectedRoute: typeof ProtectedRouteWithChildren
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
-  RendezVousRoute: typeof RendezVousRoute
   ServicesRoute: typeof ServicesRoute
 }
 
@@ -86,13 +99,6 @@ declare module '@tanstack/react-router' {
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/rendez-vous': {
-      id: '/rendez-vous'
-      path: '/rendez-vous'
-      fullPath: '/rendez-vous'
-      preLoaderRoute: typeof RendezVousRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -109,6 +115,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_protected': {
+      id: '/_protected'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof ProtectedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -116,14 +129,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_protected/rendez-vous': {
+      id: '/_protected/rendez-vous'
+      path: '/rendez-vous'
+      fullPath: '/rendez-vous'
+      preLoaderRoute: typeof ProtectedRendezVousRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
   }
 }
 
+interface ProtectedRouteChildren {
+  ProtectedRendezVousRoute: typeof ProtectedRendezVousRoute
+}
+
+const ProtectedRouteChildren: ProtectedRouteChildren = {
+  ProtectedRendezVousRoute: ProtectedRendezVousRoute,
+}
+
+const ProtectedRouteWithChildren = ProtectedRoute._addFileChildren(
+  ProtectedRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProtectedRoute: ProtectedRouteWithChildren,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
-  RendezVousRoute: RendezVousRoute,
   ServicesRoute: ServicesRoute,
 }
 export const routeTree = rootRouteImport

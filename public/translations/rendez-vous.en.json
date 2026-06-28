@@ -49,6 +49,11 @@
       }
     ]
   },
+  "auth": {
+    "title": "Login required",
+    "message": "You must be logged in to book an appointment.",
+    "button": "Back to home"
+  },
   "confirmation": {
     "title": "Appointment booking sent!",
     "message": "[{eventType}] scheduled for {date}.",

@@ -1,3 +1,4 @@
+// fichier src/components/booking/BookingInfo.tsx
 import { Mail, RefreshCw, Globe } from "lucide-react";
 
 interface BookingInfoProps {

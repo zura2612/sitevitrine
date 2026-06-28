@@ -1,4 +1,4 @@
-// fichier src/routes/rendez-vous.tsx
+// fichier src/routes/_protected/rendez-vous.tsx
 import { useState, useEffect, useCallback } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -13,15 +13,12 @@ import { BookingInfo } from "@/components/booking/BookingInfo";
 import { EventSelector } from "@/components/booking/EventSelector";
 import { buildCalLink } from "@/lib/cal";
 import { CAL_EVENTS, getDefaultEvent, getEventById } from "@/config/cal-events";
-import {
-  getLastSelectedEvent,
-  setLastSelectedEvent
-} from "@/lib/last-event";
+import { getLastSelectedEvent, setLastSelectedEvent } from "@/lib/last-event";
 import type { CalBookingDetails } from "@/types/cal";
+import { BOOKING_STORAGE_KEY } from "@/lib/storage-keys"; // ✅ Import centralisé
+import { useAuth0 } from "@auth0/auth0-react"; // ✅ Import Auth0
 
 const sectionStyle = "mb-1 border border-black container-narrow";
-const STORAGE_KEY = "lastBooking";
-
 type BookingStatus = "idle" | "success" | "cancelled";
 
 // Validation manuelle des search params (sans Zod)
@@ -30,7 +27,7 @@ const validateSearch = (search: Record<string, unknown>) => {
   return { event };
 };
 
-export const Route = createFileRoute("/rendez-vous")({
+export const Route = createFileRoute("/_protected/rendez-vous")({
   validateSearch,
   head: () => ({
     meta: [
@@ -54,15 +51,14 @@ function BookingPage() {
   const navigate = useNavigate();
   const search = Route.useSearch();
 
-  const { data: t, isLoading, error } = usePageTranslations<BookingTranslations>("rendez-vous", lang);
-
+  // ✅ 1. APPEL DE TOUS LES HOOKS EN DÉBUT DE COMPOSANT (Règle d'or React)
+  const { data: t, isLoading: isTransLoading, error } = usePageTranslations<BookingTranslations>("rendez-vous", lang);
+  const { isAuthenticated, isLoading: isAuthLoading } = useAuth0();
+  
   const [status, setStatus] = useState<BookingStatus>("idle");
   const [lastBooking, setLastBooking] = useState<CalBookingDetails | null>(null);
 
-  // Déterminer l'événement sélectionné :
-  // 1. Paramètre URL (?event=xxx)
-  // 2. Dernier événement mémorisé (localStorage)
-  // 3. Événement par défaut
+  // Logique de sélection d'événement (déterministe, pas de hook ici)
   const selectedEvent = (() => {
     if (search.event) {
       const fromUrl = getEventById(search.event);
@@ -76,13 +72,13 @@ function BookingPage() {
     return getDefaultEvent();
   })();
 
-  // Synchroniser l'URL si aucun paramètre mais un dernier événement existe
+  // Effets
   useEffect(() => {
     if (!search.event) {
       const lastEventId = getLastSelectedEvent();
       if (lastEventId && getEventById(lastEventId)) {
         navigate({
-          to: "/rendez-vous",
+          to: "/_protected/rendez-vous",
           search: { event: lastEventId },
           replace: true
         });
@@ -90,40 +86,34 @@ function BookingPage() {
     }
   }, [search.event, navigate]);
 
-  // Restauration de l'état après refresh (persistance session)
   useEffect(() => {
     try {
-      const saved = sessionStorage.getItem(STORAGE_KEY);
+      const saved = sessionStorage.getItem(BOOKING_STORAGE_KEY);
       if (saved) {
         const booking = JSON.parse(saved) as CalBookingDetails;
         if (booking && booking.date) {
           setLastBooking(booking);
           setStatus("success");
         } else {
-          sessionStorage.removeItem(STORAGE_KEY);
+          sessionStorage.removeItem(BOOKING_STORAGE_KEY);
         }
       }
     } catch (error) {
       console.error("Failed to restore booking state:", error);
-      sessionStorage.removeItem(STORAGE_KEY);
+      sessionStorage.removeItem(BOOKING_STORAGE_KEY);
     }
   }, []);
 
   const handleEventSelect = useCallback((eventId: string) => {
-    // Mettre à jour l'URL
     navigate({
-      to: "/rendez-vous",
+      to: "/_protected/rendez-vous",
       search: { event: eventId },
       replace: true
     });
-
-    // Mémoriser dans localStorage
     setLastSelectedEvent(eventId);
-
-    // Réinitialiser l'état de réservation
     setStatus("idle");
     setLastBooking(null);
-    sessionStorage.removeItem(STORAGE_KEY);
+    sessionStorage.removeItem(BOOKING_STORAGE_KEY);
   }, [navigate]);
 
   const handleBookingSuccess = useCallback((data: CalBookingDetails) => {
@@ -131,15 +121,12 @@ function BookingPage() {
       if (current === "success") return current;
       return "success";
     });
-
     setLastBooking(data);
-
     try {
-      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      sessionStorage.setItem(BOOKING_STORAGE_KEY, JSON.stringify(data));
     } catch (error) {
       console.warn("Failed to persist booking:", error);
     }
-
     setTimeout(() => {
       document.getElementById("booking-confirmation")?.scrollIntoView({
         behavior: "smooth",
@@ -150,15 +137,14 @@ function BookingPage() {
 
   const handleBookingCancel = useCallback(() => {
     setStatus("cancelled");
-    sessionStorage.removeItem(STORAGE_KEY);
+    sessionStorage.removeItem(BOOKING_STORAGE_KEY);
   }, []);
 
   const handleReschedule = useCallback((data: CalBookingDetails) => {
     setLastBooking(data);
     setStatus("success");
-
     try {
-      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      sessionStorage.setItem(BOOKING_STORAGE_KEY, JSON.stringify(data));
     } catch (error) {
       console.warn("Failed to persist rescheduled booking:", error);
     }
@@ -167,7 +153,7 @@ function BookingPage() {
   const handleNewBooking = useCallback(() => {
     setStatus("idle");
     setLastBooking(null);
-    sessionStorage.removeItem(STORAGE_KEY);
+    sessionStorage.removeItem(BOOKING_STORAGE_KEY);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
@@ -175,22 +161,47 @@ function BookingPage() {
     navigate({ to: "/" });
   }, [navigate]);
 
-  if (isLoading) {
+  // ✅ 2. VÉRIFICATIONS ET RETOURS CONDITIONNELS APRÈS LES HOOKS
+  
+  // Chargement global (Auth0 ou Traductions)
+  if (isAuthLoading || isTransLoading) {
     return (
       <p className="text-center py-10 animate-pulse" aria-live="polite">
-        Chargement du contenu de BookingPage...
+        Chargement...
       </p>
     );
   }
 
+  // Erreur de traduction
   if (error || !t) {
     return (
-      <p className="text-center py-10 text-destructive" role="alert">
-        {error instanceof Error ? error.message : "Impossible de charger les textes."}
-      </p>
+      <main className="w-full">
+        <section className={sectionStyle}>
+          <p className="text-center py-4 text-destructive" role="alert">
+            {error instanceof Error ? error.message : "Impossible de charger les textes."}
+          </p>
+        </section>
+      </main>
     );
   }
 
+  // Non authentifié
+  if (!isAuthenticated) {
+    return (
+      <div className="container-narrow py-20 text-center">
+        <h2 className="text-2xl font-bold mb-4">{t.auth.title}</h2>
+        <p className="text-muted-foreground mb-6">{t.auth.message}</p>
+        <button
+          onClick={() => navigate({ to: "/" })}
+          className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90"
+        >
+          {t.auth.button}
+        </button>
+      </div>
+    );
+  }
+
+  // ✅ 3. RENDU PRINCIPAL
   const calLink = buildCalLink(selectedEvent.slug);
 
   return (

@@ -1,42 +1,38 @@
 // fichier src/routes/__root.tsx
-import { HeadContent, Scripts, createRootRoute, Link } from '@tanstack/react-router';
+import { HeadContent, Scripts, createRootRoute, useRouter } from '@tanstack/react-router';
 import { useEffect } from 'react';
 import type { ReactNode } from 'react';
 import { Footer } from '../components/Footer';
 import { Header } from  '../components/Header';
 import { Auth0Wrapper } from '../components/Auth0Wrapper';
-//import { auth0Config } from '../auth/auth0-config';
+import { useAuth0 } from '@auth0/auth0-react';
 import { LanguageProvider, useLanguage } from '../contexts/LanguageContext';
 import { preloadAllTranslations } from "../hooks/usePageTranslations";
-
-import appCss from '../styles.css?url'
-
-// import des constantes d'environnement
-import {siteConfig} from "../config/site";
-
-// Imports de la logique de traduction
+import appCss from '../styles.css?url';
+import { siteConfig } from "../config/site";
 import { usePageTranslations } from "../hooks/usePageTranslations";
 import type { NotFoundTranslations } from "../types/translations";
 
 function NotFoundComponent() {
   const { lang } = useLanguage();
-    // Chargement asynchrone typé manuellement
+   // Chargement asynchrone typé manuellement
     const { data: t, isLoading, error } = usePageTranslations<NotFoundTranslations>("__root", lang);
+  //const { data: t, isLoading, error } = usePageTranslations("__root", lang);
   
-    if (isLoading) return <p className="text-center py-10 animate-pulse" aria-live="polite">Chargement du contenu de NotFoundComponent...</p>;
+  if (isLoading) return <p>Chargement du contenu de NotFoundComponent...</p>;
+  if (error || !t) return <p>{error instanceof Error ? error.message : "Impossible de charger les textes."}</p>;
+
+/*  if (isLoading) return <p className="text-center py-10 animate-pulse" aria-live="polite">Chargement du contenu de NotFoundComponent...</p>;
     if (error || !t) return <p className="text-center py-10 text-destructive" role="alert">
-    {error instanceof Error ? error.message : "Impossible de charger les textes."}</p>;
+    {error instanceof Error ? error.message : "Impossible de charger les textes."}</p>;*/
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-4xl font-bold text-foreground">{t.primary}</h1>
-        <p className="mt-2 text-sm text-muted-foreground">{t.secondary}</p>
-        <div className="mt-6">
-          <Link to="/" className="inline-flex items-center justify-center rounded-full bg-accent px-5 py-2.5 
-          text-sm font-semibold text-accent-foreground transition-colors hover:opacity-90">{t.button}</Link>
-        </div>
-      </div>
+    <div className="container-narrow py-20 text-center">
+      <h1 className="text-4xl font-bold mb-4">{t.primary}</h1>
+      <p className="mb-6">{t.secondary}</p>
+      <button onClick={() => window.history.back()} className="px-4 py-2 bg-primary text-white rounded">
+        {t.button}
+      </button>
     </div>
   );
 }
@@ -56,28 +52,44 @@ export const Route = createRootRoute({
   }),
   shellComponent: RootDocument,
   notFoundComponent: NotFoundComponent,
-})
+});
 
-  function RootDocument({ children }: { children: ReactNode }) {
-  // Le preload des traductions ne doit s'executer que cote client (apres hydratation).
-  // useEffect ne s'execute jamais cote serveur / Cloudflare Workers,
-  // ce qui evite l'erreur "Disallowed operation called within global scope".
-  useEffect(() => { preloadAllTranslations(); }, []);
+function RootDocument({ children }: { children: ReactNode }) {
+  useEffect(() => { 
+    preloadAllTranslations(); 
+  }, []);
+  
+  // ✅ Récupération de l'instance du router et de l'état Auth0
+  const router = useRouter();
+  const { isAuthenticated, isLoading } = useAuth0();
+
+  // ✅ Mise à jour du contexte du router à chaque changement d'état Auth0
+  useEffect(() => {
+    // Vérification de sécurité pour éviter l'erreur "Cannot set properties of undefined"
+    if (router && router.context) {
+      router.context.auth = {
+        isAuthenticated,
+        isLoading
+      };
+    }
+  }, [isAuthenticated, isLoading, router]);
+
   return (
     <html lang="fr">
       <head>
         <HeadContent />
       </head>
-      <body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-[rgba(79,184,178,0.24)]">
+      <body>
+        {/* ✅ Auth0Provider enveloppe tout le contenu pour que useAuth0() fonctionne */}
         <Auth0Wrapper>
-   	      <LanguageProvider>
-     	      <Header />
-     	      {children}
+          <LanguageProvider>
+            <Header />
+            {children}
             <Footer />
-     	      <Scripts />
           </LanguageProvider>
         </Auth0Wrapper>
+        <Scripts />
       </body>
     </html>
-  )
+  );
 }

@@ -1,3 +1,4 @@
+// fichier src/components/booking/BookingConfirmation.tsx
 import type { CalBookingData } from "@/types/cal";
 
 interface BookingConfirmationProps {
