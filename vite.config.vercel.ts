@@ -1,4 +1,4 @@
-// fichier fvelec47/vite.config.vercel.ts
+// fichier vite.config.vercel.ts
 import { defineConfig } from 'vite'
 import { devtools } from '@tanstack/devtools-vite'
 import { tanstackStart } from '@tanstack/react-start/plugin/vite'

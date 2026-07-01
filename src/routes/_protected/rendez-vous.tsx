@@ -11,12 +11,13 @@ import { InlineCalendar } from "@/components/booking/InlineCalendar";
 import { BookingConfirmation } from "@/components/booking/BookingConfirmation";
 import { BookingInfo } from "@/components/booking/BookingInfo";
 import { EventSelector } from "@/components/booking/EventSelector";
-import { buildCalLink } from "@/lib/cal";
+//import { buildCalLink } from "@/lib/cal";
+import { buildCalLinkWithPrefill } from "@/lib/cal";
 import { CAL_EVENTS, getDefaultEvent, getEventById } from "@/config/cal-events";
 import { getLastSelectedEvent, setLastSelectedEvent } from "@/lib/last-event";
 import type { CalBookingDetails } from "@/types/cal";
 import { BOOKING_STORAGE_KEY } from "@/lib/storage-keys"; // ✅ Import centralisé
-import { useAuth0 } from "@auth0/auth0-react"; // ✅ Import Auth0
+import { useAuth } from "@workos-inc/authkit-react"; // ✅ Import WorkOS
 
 const sectionStyle = "mb-1 border border-black container-narrow";
 type BookingStatus = "idle" | "success" | "cancelled";
@@ -53,7 +54,9 @@ function BookingPage() {
 
   // ✅ 1. APPEL DE TOUS LES HOOKS EN DÉBUT DE COMPOSANT (Règle d'or React)
   const { data: t, isLoading: isTransLoading, error } = usePageTranslations<BookingTranslations>("rendez-vous", lang);
-  const { isAuthenticated, isLoading: isAuthLoading } = useAuth0();
+  // ✅ Hook WorkOS : user est null si non connecté
+  const { user, isLoading: isAuthLoading } = useAuth();
+  const isAuthenticated = !!user;
   
   const [status, setStatus] = useState<BookingStatus>("idle");
   const [lastBooking, setLastBooking] = useState<CalBookingDetails | null>(null);
@@ -78,7 +81,8 @@ function BookingPage() {
       const lastEventId = getLastSelectedEvent();
       if (lastEventId && getEventById(lastEventId)) {
         navigate({
-          to: "/_protected/rendez-vous",
+          //to: "/_protected/rendez-vous",
+          to: "/rendez-vous",
           search: { event: lastEventId },
           replace: true
         });
@@ -99,14 +103,15 @@ function BookingPage() {
         }
       }
     } catch (error) {
-      console.error("Failed to restore booking state:", error);
+      console.error("Echec à la récupération de l'état de la réservation:", error);
       sessionStorage.removeItem(BOOKING_STORAGE_KEY);
     }
   }, []);
 
   const handleEventSelect = useCallback((eventId: string) => {
     navigate({
-      to: "/_protected/rendez-vous",
+      //to: "/_protected/rendez-vous",
+      to: "/rendez-vous",
       search: { event: eventId },
       replace: true
     });
@@ -125,7 +130,7 @@ function BookingPage() {
     try {
       sessionStorage.setItem(BOOKING_STORAGE_KEY, JSON.stringify(data));
     } catch (error) {
-      console.warn("Failed to persist booking:", error);
+      console.warn("Echec pour enregistrer l'état de la réservation:", error);
     }
     setTimeout(() => {
       document.getElementById("booking-confirmation")?.scrollIntoView({
@@ -146,7 +151,7 @@ function BookingPage() {
     try {
       sessionStorage.setItem(BOOKING_STORAGE_KEY, JSON.stringify(data));
     } catch (error) {
-      console.warn("Failed to persist rescheduled booking:", error);
+      console.warn("Echec pour enregistrer la réservation modifiée:", error);
     }
   }, []);
 
@@ -163,7 +168,7 @@ function BookingPage() {
 
   // ✅ 2. VÉRIFICATIONS ET RETOURS CONDITIONNELS APRÈS LES HOOKS
   
-  // Chargement global (Auth0 ou Traductions)
+  // Chargement global (Auth0-WorkOS ou Traductions)
   if (isAuthLoading || isTransLoading) {
     return (
       <p className="text-center py-10 animate-pulse" aria-live="polite">
@@ -202,7 +207,19 @@ function BookingPage() {
   }
 
   // ✅ 3. RENDU PRINCIPAL
-  const calLink = buildCalLink(selectedEvent.slug);
+  //const calLink = buildCalLink(selectedEvent.slug);
+  // Récupérer les informations de l'utilisateur WorkOS
+  const userName = user?.firstName && user?.lastName 
+    ? `${user.firstName} ${user.lastName}`
+    : user?.firstName || user?.lastName || undefined;
+  
+  const userEmail = user?.email || undefined;
+
+  // ✅ Utiliser la nouvelle fonction utilitaire
+  const calLink = buildCalLinkWithPrefill(selectedEvent.slug, {
+    name: userName,
+    email: userEmail,
+  });
 
   return (
     <main className="w-full">
@@ -276,8 +293,7 @@ function BookingPage() {
         secondary={t.info.secondary}
         cartes={t.info.cartes}
       />
-
-      <CtaBand />
+      
     </main>
   );
 }

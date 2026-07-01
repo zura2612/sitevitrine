@@ -4,8 +4,10 @@ import { useEffect } from 'react';
 import type { ReactNode } from 'react';
 import { Footer } from '../components/Footer';
 import { Header } from  '../components/Header';
-import { Auth0Wrapper } from '../components/Auth0Wrapper';
-import { useAuth0 } from '@auth0/auth0-react';
+//import { Auth0Wrapper } from '../components/Auth0Wrapper';// Hook Auth0
+//import { useAuth0 } from '@auth0/auth0-react';
+import { WorkOSWrapper } from '../components/WorkOSWrapper';
+import { useAuth } from '@workos-inc/authkit-react';// Hook WorkOS
 import { LanguageProvider, useLanguage } from '../contexts/LanguageContext';
 import { preloadAllTranslations } from "../hooks/usePageTranslations";
 import appCss from '../styles.css?url';
@@ -16,8 +18,8 @@ import type { NotFoundTranslations } from "../types/translations";
 function NotFoundComponent() {
   const { lang } = useLanguage();
    // Chargement asynchrone typé manuellement
-    const { data: t, isLoading, error } = usePageTranslations<NotFoundTranslations>("__root", lang);
-  //const { data: t, isLoading, error } = usePageTranslations("__root", lang);
+   // const { data: t, isLoading, error } = usePageTranslations<NotFoundTranslations>("__root", lang);
+  const { data: t, isLoading, error } = usePageTranslations("__root", lang);
   
   if (isLoading) return <p>Chargement du contenu de NotFoundComponent...</p>;
   if (error || !t) return <p>{error instanceof Error ? error.message : "Impossible de charger les textes."}</p>;
@@ -47,12 +49,30 @@ export const Route = createRootRoute({
     ],
     links: [
       { rel: 'stylesheet', href: appCss },
-      { rel: 'icon', href: '../public/favicon.ico' },
+      { rel: 'icon', href: 'favicon.ico' },
     ],
   }),
   shellComponent: RootDocument,
   notFoundComponent: NotFoundComponent,
 });
+
+// ✅ Composant interne qui utilise useAuth en toute sécurité
+function AuthContextUpdater({ children }: { children: ReactNode }) {
+  const router = useRouter();
+  const { user, isLoading } = useAuth(); // ✅ Ici, on est sûr d'être dans le Provider
+
+  useEffect(() => {
+    if (router && router.context) {
+      router.context.auth = {
+        isAuthenticated: !!user,
+        isLoading,
+        user: user || undefined
+      };
+    }
+  }, [user, isLoading, router]);
+
+  return <>{children}</>;
+}
 
 function RootDocument({ children }: { children: ReactNode }) {
   useEffect(() => { 
@@ -60,11 +80,12 @@ function RootDocument({ children }: { children: ReactNode }) {
   }, []);
   
   // ✅ Récupération de l'instance du router et de l'état Auth0
-  const router = useRouter();
-  const { isAuthenticated, isLoading } = useAuth0();
+  /*const router = useRouter();*/
+  //const { isAuthenticated, isLoading } = useAuth0();// utilisation du hook Auth0
+  /*const { user, isLoading, error } = useAuth();// utilisation du hook WorkOS*/
 
   // ✅ Mise à jour du contexte du router à chaque changement d'état Auth0
-  useEffect(() => {
+  /*useEffect(() => {
     // Vérification de sécurité pour éviter l'erreur "Cannot set properties of undefined"
     if (router && router.context) {
       router.context.auth = {
@@ -72,7 +93,7 @@ function RootDocument({ children }: { children: ReactNode }) {
         isLoading
       };
     }
-  }, [isAuthenticated, isLoading, router]);
+  }, [isAuthenticated, isLoading, router]);*/
 
   return (
     <html lang="fr">
@@ -80,14 +101,19 @@ function RootDocument({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {/* ✅ Auth0Provider enveloppe tout le contenu pour que useAuth0() fonctionne */}
-        <Auth0Wrapper>
+        {/* ✅ Auth0Wrapper enveloppe tout le contenu pour que useAuth0() fonctionne */}
+        {/* ✅ WorkOSWrapper enveloppe tout le contenu pour que useAuth() fonctionne */}
+        {/*<Auth0Wrapper>*/}
+        <WorkOSWrapper>
+        <AuthContextUpdater>
           <LanguageProvider>
             <Header />
             {children}
             <Footer />
           </LanguageProvider>
-        </Auth0Wrapper>
+        </AuthContextUpdater>
+        </WorkOSWrapper>
+        {/*</Auth0Wrapper>*/}
         <Scripts />
       </body>
     </html>

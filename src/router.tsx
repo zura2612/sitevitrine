@@ -2,11 +2,25 @@
 import { createRouter as createTanStackRouter } from '@tanstack/react-router'
 import { routeTree } from './routeTree.gen'
 
-// ✅ 1. Définition du type de notre contexte global
+// ✅ 1. Définition du type de notre contexte global pour auth0
+/*export interface RouterContext {
+  auth: {
+    isAuthenticated: boolean;
+    isLoading: boolean;
+  };
+}*/
+
+// ✅ Définition du type de notre contexte global pour WorkOS
 export interface RouterContext {
   auth: {
     isAuthenticated: boolean;
     isLoading: boolean;
+    user?: {
+      id: string;
+      email?: string;
+      firstName?: string;
+      lastName?: string;
+    };
   };
 }
 
@@ -34,11 +48,20 @@ declare module '@tanstack/react-router' {
     router: ReturnType<typeof getRouter>
   }
   
-  // ✅ C'est ici qu'on dit à TS que le contexte a cette forme
-  interface ContextOptions {
+  // ✅ C'est ici qu'on dit à TS que le contexte a cette forme pour auth0
+  /*interface ContextOptions {
     auth: {
       isAuthenticated: boolean;
       isLoading: boolean;
     };
+  }*/
+  // le contexte a cette forme pour workos
+  interface ContextOptions {
+    auth: {
+      isAuthenticated: boolean;
+      isLoading: boolean;
+      user?: any;
+    };
   }
+
 }

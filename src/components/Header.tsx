@@ -1,6 +1,7 @@
 // fichier src/components/Header.tsx
 import { Link } from "@tanstack/react-router";
-import { useAuth0 } from "@auth0/auth0-react";
+//import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "@workos-inc/authkit-react"; 
 import { ThemeToggle } from "./ThemeToggle";
 import { LogToggle } from "./LogToggle";
 import { LockedLink } from "./LockedLink";
@@ -25,7 +26,10 @@ export function Header() {
 
   const { lang } = useLanguage();
   const { data: t, isLoading, error } = usePageTranslations<HeaderTranslations>("header", lang);
-  const { isAuthenticated, isLoading: isAuthLoading } = useAuth0(); // état de connexion de l'utilisateur
+  //const { isAuthenticated, isLoading: isAuthLoading } = useAuth0(); // état de connexion de l'utilisateur
+  // ✅ Hook WorkOS : user est null si non connecté
+  const { user, isLoading: isAuthLoading } = useAuth();
+  const isAuthenticated = !!user;
 
   // Handlers pour le modal
   const openAuthModal = (message: string) => {
