@@ -1,4 +1,4 @@
-{
+/*{
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "sitevitrine",
   "compatibility_date": "2025-09-02",
@@ -6,4 +6,36 @@
   "main": "@tanstack/react-start/server-entry",
   "workers_dev": true, // active l'exposition publique par défaut
   "preview_urls": false // Désactive les URLs de prévisualisation CI/CD
+}*/
+
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "sitevitrine",
+  "compatibility_date": "2026-01-01",
+  
+  // ✅ Configuration pour SPA (Single Page Application)
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "./dist",
+    // ✅ Redirige toutes les URLs inexistantes vers index.html
+    // Permet à TanStack Router de gérer le routing côté client
+    "not_found_handling": "single-page-application",
+    // ✅ Gère automatiquement /about vs /about/
+    "html_handling": "auto-trailing-slash"
+  },
+  
+  // ✅ Variables d'environnement pour le build
+  // Ces variables seront injectées au moment du build par Vite
+  "vars": {
+    "VITE_WORKOS_CLIENT_ID": "client_xxxxxxxxxxxx",
+    "VITE_CAL_USERNAME": "votre-username-cal",
+    "VITE_MAINTENANCE_WORKER_URL": "https://maintenance-worker.votre-compte.workers.dev",
+    "VITE_SITE_NAME": "sitevitrine101poils",
+    "VITE_MAINTENANCE_FALLBACK_MODE": "normal"
+  },
+  
+  // ✅ Observabilité (logs et métriques)
+  "observability": {
+    "enabled": true
+  }
 }
