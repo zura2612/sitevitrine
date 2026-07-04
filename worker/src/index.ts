@@ -1,7 +1,9 @@
-// fichier worker/src/index.ts
+// fichier resend-worker/src/index.ts
+// Worker Cloudflare qui utilise resend.com pour envoyer un courriel
 export interface Env {
-  RESEND_API_KEY: string;
+  RESEND_API_KEY: string; // secret
   TO_EMAIL: string;
+  FROM_NAME: string;
 }
 
 export default {
@@ -12,6 +14,9 @@ export default {
       "Access-Control-Allow-Methods": "POST, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type",
     };
+
+//console.log("TO_EMAIL: ",env.TO_EMAIL);
+//console.log("RESEND_API_KEY: ",env.RESEND_API_KEY);
 
     // Gestion de la requête "Preflight" OPTIONS faite par le navigateur
     if (request.method === "OPTIONS") {
@@ -47,13 +52,13 @@ export default {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: "Site Web <onboarding@resend.dev>", // Laisse onboarding au début, tu changeras après validation DNS
+          from: `"${env.FROM_NAME}" <onboarding@resend.dev>`, // Laisse onboarding au début, tu changeras après validation DNS
           to: [env.TO_EMAIL], // Ton adresse e-mail de réception
           subject: `✨ Nouvelle demande de contact sur le service : ${project}`,
           html: `
             <h3>Demande de contact</h3>
             <p><strong>Prénom Nom:</strong> ${prenomNom}</p>
-            <p><strong>EMAIL :</strong> ${courriel}</p>
+            <p><strong>Email :</strong> ${courriel}</p>
             <p><strong>Téléphone :</strong> ${phone || "Non renseigné"}</p>
             <p><strong>Type de service :</strong> ${project}</p>
             <p><strong>Message :</strong></p>

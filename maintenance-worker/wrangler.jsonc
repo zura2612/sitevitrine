@@ -1,11 +1,11 @@
-/* fichier resend-worker/wrangler.jsonc */
+/* fichier maintenance-worker/wangler.jsonc */
 /**
  * For more details on how to configure Wrangler, refer to:
  * https://developers.cloudflare.com/workers/wrangler/configuration/
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "worker",
+	"name": "maintenance-worker",
 	"main": "src/index.ts",
 	"compatibility_date": "2026-06-04",
 	"workers_dev": true,
@@ -13,7 +13,7 @@
 	"observability": {"enabled": true},
 	"upload_source_maps": true,
 	"compatibility_flags": ["nodejs_compat"],
-        /*"vars": { "TO_EMAIL": "francois.vauchot@gmail.com" }*/
+        "vars": { "MAINTENANCE_CONFIG_SITEVITRINE":"{\"mode\":\"normal\",\"message\":{\"fr\":\"Site en maintenance\",\"en\":\"Site under maintenance\"},\"description\":{\"fr\":\"Nous effectuons des améliorations.\",\"en\":\"We are making improvements.\"},\"estimatedEnd\":{\"fr\":\"31 Décembre 2026\",\"en\":\"31th December 2026\"} }"}
 	/**
 	 * Smart Placement
 	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement

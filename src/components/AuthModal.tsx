@@ -12,14 +12,14 @@ interface AuthModalProps {
 /**
  * Modal d'authentification accessible.
  * - Focus trap : Tab/Shift+Tab restent dans le modal
- * - Fermeture via la croix uniquement
+ * - Fermeture via la croix, le fond, ou la touche Échap
  * - Utilise un portail React pour éviter les problèmes de z-index
  * - Empêche le scroll du body quand ouvert
  */
 export function AuthModal({ isOpen, onClose, message }: AuthModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
-  const triggerRef = useRef<HTMLElement | null>(null);
+  const triggerRef = useRef<HTMLElement | null>(null); // Mémoriser l'élément déclencheur pour restaurer le focus à la fermeture
 
   // Mémoriser l'élément déclencheur pour restaurer le focus à la fermeture
   useEffect(() => {
@@ -49,15 +49,17 @@ export function AuthModal({ isOpen, onClose, message }: AuthModalProps) {
   useEffect(() => {
     if (!isOpen) return;
 
+    const modal = modalRef.current;
+    if (!modal) return;
+
+    const focusableElements = modal.querySelectorAll<HTMLElement>(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
     const handleTabKey = (e: KeyboardEvent) => {
       if (e.key !== "Tab" || !modalRef.current) return;
-
-      const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-      );
-      const firstElement = focusableElements[0];
-      const lastElement = focusableElements[focusableElements.length - 1];
-
       if (e.shiftKey) {
         // Shift+Tab : si on est sur le premier élément, boucler vers le dernier
         if (document.activeElement === firstElement) {
@@ -73,30 +75,47 @@ export function AuthModal({ isOpen, onClose, message }: AuthModalProps) {
       }
     };
 
-    document.addEventListener("keydown", handleTabKey);
-    return () => document.removeEventListener("keydown", handleTabKey);
-  }, [isOpen]);
+    // ✅ MODIFICATION : Gestion de la touche Échap pour fermer le modal
+    const handleEscapeKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
 
-  if (!isOpen || typeof document === "undefined") return null;
+    modal.addEventListener("keydown", handleTabKey);
+    modal.addEventListener("keydown", handleEscapeKey);
+
+    return () => {
+      modal.removeEventListener("keydown", handleTabKey);
+      modal.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [isOpen, onClose]); 
+
+  if (!isOpen) return null;
 
   return createPortal(
     <div
       className="fixed inset-0 z-[200] flex items-center justify-center"
       role="presentation"
     >
-      {/* Overlay */}
+      {/* ✅ MODIFICATION : Overlay avec onClick pour fermer */}
+      {/* ✅ MODIFICATION : aria-hidden pour les lecteurs d'écran */}
+      {/* ✅ MODIFICATION : cursor-pointer pour indiquer la cliquabilité */}
       <div
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm cursor-pointer"
+        onClick={onClose}
         aria-hidden="true"
       />
 
+      {/* ✅ MODIFICATION : stopPropagation pour éviter la fermeture au clic dans le modal */}
       {/* Modal */}
       <div
         ref={modalRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby="auth-modal-title"
-        className="relative z-10 w-full max-w-sm mx-4 rounded-2xl border border-black bg-card p-6 shadow-soft"
+        onClick={(e) => e.stopPropagation()}
+        className="relative z-10 w-full max-w-md mx-4 rounded-xl border border-black bg-card p-6 shadow-soft"
       >
         {/* Bouton de fermeture */}
         <button
@@ -111,12 +130,7 @@ export function AuthModal({ isOpen, onClose, message }: AuthModalProps) {
 
         {/* Contenu */}
         <div className="">
-          {/*<h2 id="auth-modal-title" className="text-lg font-semibold mb-2">
-            Accès restreint
-          </h2>*/}
-          <p className="text-sm text-muted-foreground">
-            {message}
-          </p>
+          <p className="text-base font-bold text-destructive">{message}</p>
         </div>
       </div>
     </div>,

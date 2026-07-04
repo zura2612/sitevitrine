@@ -9,9 +9,12 @@
     "dev": "vite dev",
     "build:vercel": "vite build --config vite.config.vercel.ts",
     "build:cloudflare": "cross-env VITE_BASE_URL=https://101poils.francois-vauchot.workers.dev vite build --config vite.config.cloudflare.ts",
+    "build:dev": "vite build --mode development",
+    "build:production": "vite build --mode production",
     "build:sitemapVercel": "node scripts/genererSitemapVercel.mjs",
     "build:sitemapCloudflare": "node scripts/genererSitemapCloudflare.mjs",
     "preview": "vite preview",
+    "preview:production": "vite preview --mode production",
     "test": "vitest run",
     "deploy:cloudflare": "wrangler deploy",
     "deploy:vercel": "vercel deploy --prod"

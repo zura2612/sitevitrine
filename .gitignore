@@ -1,6 +1,7 @@
 # dépendances
 node_modules/
 worker/node_modules/
+maintenance-worker/node_modules/
 
 # build et outputs
 dist/
@@ -20,6 +21,3 @@ dist-ssr/
 .vscode/
 .wrangler/
 .vercel/
-
-.vercel
-.env*

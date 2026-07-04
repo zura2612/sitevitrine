@@ -6,7 +6,7 @@ import { usePageTranslations } from "@/hooks/usePageTranslations";
 import type { BookingTranslations } from "@/types/translations";
 import { siteConfig } from "@/config/site";
 import { siteStyle } from "@/config/site";
-import { CtaBand } from "@/components/CtaBand";
+//import { CtaBand } from "@/components/CtaBand";
 import { InlineCalendar } from "@/components/booking/InlineCalendar";
 import { BookingConfirmation } from "@/components/booking/BookingConfirmation";
 import { BookingInfo } from "@/components/booking/BookingInfo";
