@@ -1,5 +1,5 @@
 {
-  "name": "sitevitrine",
+  "name": "sitetoilettage47",
   "private": true,
   "type": "module",
   "imports": {
@@ -7,8 +7,8 @@
   },
   "scripts": {
     "dev": "vite dev",
-    "build:vercel": "vite build --config vite.config.vercel.ts",
-    "build:cloudflare": "cross-env VITE_BASE_URL=https://101poils.francois-vauchot.workers.dev vite build --config vite.config.cloudflare.ts",
+    "build:vercel": "cross-env VITE_BASE_URL=https://sitetoilettage47.vercel.app vite build --mode production --config vite.config.vercel.ts",
+    "build:cloudflare": "cross-env VITE_BASE_URL=https://sitetoilettage47.francois-vauchot.workers.dev vite build --mode production --config vite.config.cloudflare.ts",
     "build:dev": "vite build --mode development",
     "build:production": "vite build --mode production",
     "build:sitemapVercel": "node scripts/genererSitemapVercel.mjs",

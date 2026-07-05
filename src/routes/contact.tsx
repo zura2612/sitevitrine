@@ -14,7 +14,7 @@ const borderStyle = "border border-black";
 const intituleZoneSaisieStyle = "text-xs font-semibold uppercase tracking-wider text-muted-foreground";
 const inputBase = `w-full rounded-xl ${borderStyle} bg-background text-foreground px-2 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary`;
 
-const workerUrl = import.meta.env.VITE_WORKER_URL;
+const workerUrl = import.meta.env.VITE_RESEND_WORKER_URL;
 
 export const Route = createFileRoute("/contact")({
   validateSearch: (search: Record<string, unknown>) => ({
