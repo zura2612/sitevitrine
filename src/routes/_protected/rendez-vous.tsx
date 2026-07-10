@@ -168,7 +168,7 @@ function BookingPage() {
 
   // ✅ 2. VÉRIFICATIONS ET RETOURS CONDITIONNELS APRÈS LES HOOKS
   
-  // Chargement global (Auth0-WorkOS ou Traductions)
+  // Chargement global (WorkOS ou Traductions)
   if (isAuthLoading || isTransLoading) {
     return (
       <p className="text-center py-10 animate-pulse" aria-live="polite">

@@ -84,12 +84,15 @@ function ContactPage() {
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
+    // Ajouter l'URL de la page en cours
+    const enrichedData = { ...data, pageUrl: window.location.href, };
+console.log("contact.tsx sendMail VITE_RESEND_WORKER_URL=",workerUrl);
 
     try {
       const response = await fetch(workerUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(enrichedData),
       });
 
       const result = await response.json() as { error?: string };

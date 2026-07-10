@@ -3,9 +3,16 @@
     "primary": "Book an appointment",
     "secondary": "Choose the type of appointment that suits you, then select a time slot."
   },
+
   "events": {
     "sectionTitle": "Choose your appointment type",
     "sectionSubtitle": "Select the service that best fits your needs. You will then be able to choose a time slot.",
+    "beforePrice": "travel fees not included\nprice:  ",
+    "price": "Price",
+    "free": "Free",
+    "duration": "min",
+    "selectButton": "Select",
+    "selected": "✓ Selected"
     "event30min": {
       "iconKey": "",
       "title": "30-minute discovery session",
@@ -20,14 +27,9 @@
       "iconKey": "",
       "title": "90-minute session",
       "description": "Bath + Brushing + Additional services"
-    },
-    "beforePrice": "travel fees not included\nprice:  ",
-    "price": "Price",
-    "free": "Free",
-    "duration": "min",
-    "selectButton": "Select",
-    "selected": "✓ Selected"
+    }
   },
+
   "info": {
     "primary": "Practical information",
     "secondary": "Everything you need to know about booking an appointment.",
@@ -49,11 +51,13 @@
       }
     ]
   },
+
   "auth": {
     "title": "Login required",
     "message": "You must be logged in to book an appointment.",
     "button": "Back to home"
   },
+
   "confirmation": {
     "title": "Appointment booking sent!",
     "message": "[{eventType}] scheduled for {date}.",
@@ -61,9 +65,11 @@
     "newBooking": "Book another appointment",
     "goHome": "Back to home"
   },
+
   "annulation": {
     "message": "Your appointment has been cancelled. You can book a new one below."
   },
+
   "chargement": "Loading available time slots...",
   "erreur": "Unable to load the calendar.",
   "reessayer": "Try again"

@@ -17,6 +17,7 @@
     "themeDark": "Switch to light mode",
     "login": "Log in",
     "logout": "Log out",
+    "logoutSuccess": "Successfully signed out",
     "loading": "Loading..."
   },
   "mobileSections": {

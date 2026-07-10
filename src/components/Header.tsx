@@ -174,6 +174,7 @@ export function Header() {
               labels={{
                 login: t.tooltips.login,
                 logout: t.tooltips.logout,
+                logoutSuccess: t.tooltips.logoutSuccess,
                 loading: t.tooltips.loading
               }}
             />

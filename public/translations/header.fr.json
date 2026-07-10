@@ -17,6 +17,7 @@
     "themeDark": "Passer au thème clair",
     "login": "Se connecter",
     "logout": "Se déconnecter",
+    "logoutSuccess": "Déconnexion réussie",
     "loading": "Chargement..."
   },
   "mobileSections": {

@@ -46,11 +46,12 @@ useEffect(() => {
 
 // Fonction pour pré-charger toutes les traductions
 export function preloadAllTranslations() {
-  const pages = ["header", "footer", "ctaBand", "about", "services", "contact", "home"];
+  const pages = ["header", "footer", "ctaBand", "about", "contact", "home", "rendez-vous", "services"];
   const languages = ["fr", "en"];
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const dateEnvoi = new Date().toLocaleString('fr-FR');
-  console.log("entrée dans preloadAllTranslations() le ",dateEnvoi);
+console.log("entrée dans preloadAllTranslations() le ", dateEnvoi);
+console.log("usePageTranslations.ts VITE_BASE_URL=", baseUrl);
 
   pages.forEach((page) => {
     if (!translationsCache[page]) { translationsCache[page] = {}; }

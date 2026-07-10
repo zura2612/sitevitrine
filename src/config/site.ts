@@ -20,7 +20,7 @@
   };*/
   export const siteConfig = {
   entreprise: "SANS UN POIL",
-  urlSite: "https://101poils.com",
+  urlSite: "https://sansunpoil.com",
   nom: "Sylvie Tartempion",
   siret: "82254894700000",
   adresse: "126 route de Poussignac 47250 ARGENTON",
@@ -30,7 +30,7 @@
   facebookLink: "https://www.facebook.com/francois.vauchot/",
   instagramLink: "https://instagram.com/",
   linkedinLink: "https://www.linkedin.com/",
-  headDescriptionRoot: "101 poils erreur 404 : page introuvable. Retournez à l'accueil pour découvrir nos services de toilettage en Lot-et-Garonne.",
+  headDescriptionRoot: "Erreur 404 : page introuvable. Retournez à l'accueil pour découvrir nos services de toilettage en Lot-et-Garonne.",
   headDescriptionHome: "Toiletteuse professionnelle en Lot-et-Garonne : brossage, démêlage, bain, tonte, finitions aux ciseaux et soins annexes. Devis gratuit sous 48h.",
   headDescriptionAbout: "Découvrez notre entreprise de toilettage en Lot-et-Garonne : 10 ans d'expérience, gestion du stress et contention douce. Spécialiste du soin du pelage.",
   headDescriptionServices: "Services de toilettage en Lot-et-Garonne : brossage, bain adapté, tonte selon les standards de race, soins annexes, familiarisation, conseils.",

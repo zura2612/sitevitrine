@@ -1,3 +1,4 @@
+// fichier src/config/cal-events.ts
 import type { CalEventConfig } from "@/types/cal";
 
 /**
@@ -7,33 +8,26 @@ import type { CalEventConfig } from "@/types/cal";
  *
  * Pour ajouter un événement :
  * 1. Créer l'événement dans app.cal.com avec le slug correspondant
- * 2. Ajouter une entrée ici
- * 3. Ajouter les traductions dans rendez-vous.fr.json et rendez-vous.en.json
+ * 2. Ajouter une entrée ici et mettre à jour types/translations.ts
+ * 3. translationKey cohérence avec les champs de events de BookingTranslations défini dans types/translations.ts
+ * 4. Ajouter les traductions dans rendez-vous.fr.json et rendez-vous.en.json 
  */
 export const CAL_EVENTS: CalEventConfig[] = [
   {
     id: "decouverte",
     slug: "30min",
     duration: 30,
-    price: 10,
+    price: 30,
     currency: "EUR",
     translationKey: "event30min"
   },
   {
-    id: "consultation",
+    id: "approfondi",
     slug: "60min",
     duration: 60,
-    price: 30,
-    currency: "EUR",
-    translationKey: "event60min"
-  },
-  {
-    id: "approfondi",
-    slug: "90min",
-    duration: 90,
     price: 50,
     currency: "EUR",
-    translationKey: "event90min",
+    translationKey: "event60min",
     isDefault: true
   }
 ];

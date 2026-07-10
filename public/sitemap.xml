@@ -4,7 +4,7 @@
 
    <!-- Page d'accueil -->
    <url>
-      <loc>https://www.101poils.fvchtsoft.com</loc>
+      <loc>https://www.sansunpoil.com</loc>
       <lastmod>2026-06-01</lastmod>
       <changefreq>monthly</changefreq>
       <priority>1.0</priority>
@@ -12,21 +12,21 @@
 
    <!-- Pages principales -->
    <url>
-      <loc>https://www.101poils.fvchtsoft.com/about</loc>
+      <loc>https://www.sansunpoil.com/about</loc>
       <lastmod>2026-06-01</lastmod>
       <changefreq>yearly</changefreq>
       <priority>0.8</priority>
    </url>
 
    <url>
-      <loc>https://www.101poils.fvchtsoft.com/contact</loc>
+      <loc>https://www.sansunpoil.com/contact</loc>
       <lastmod>2026-06-01</lastmod>
       <changefreq>yearly</changefreq>
       <priority>0.8</priority>
    </url>
 
    <url>
-      <loc>https://www.101poils.fvchtsoft.com/services</loc>
+      <loc>https://www.sansunpoil.com/services</loc>
       <lastmod>2026-06-01</lastmod>
       <changefreq>yearly</changefreq>
       <priority>0.8</priority>
@@ -34,14 +34,14 @@
    
    <!-- Pages légales (obligatoires) -->
    <url>
-      <loc>https://101poils.fvchtsoft.com/legal/legal.html</loc>
+      <loc>https://sansunpoil.com/legal/legal.html</loc>
       <lastmod>2026-06-06</lastmod>
       <changefreq>yearly</changefreq>
       <priority>0.3</priority>
    </url>
 
    <url>
-      <loc>https://101poils.fvchtsoft.com/legal/privacy.html</loc>
+      <loc>https://sansunpoil.com/legal/privacy.html</loc>
       <lastmod>2026-06-06</lastmod>
       <changefreq>yearly</changefreq>
       <priority>0.3</priority>

@@ -121,8 +121,10 @@ export interface HeaderTranslations {
     themeDark: string;
     login: string;
     logout: string;
+    logoutSuccess: string; // label du toast
     loading: string;
   };
+  
   mobileSections: {
     language: string;
     display: string;

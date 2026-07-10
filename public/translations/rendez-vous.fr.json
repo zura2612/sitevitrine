@@ -3,9 +3,16 @@
     "primary": "Prendre rendez-vous",
     "secondary": "Choisissez le type de rendez-vous qui vous convient, puis sélectionnez un créneau."
   },
+
   "events": {
     "sectionTitle": "Choisissez votre type de rendez-vous",
     "sectionSubtitle": "Sélectionnez l'offre adaptée à vos besoins. Vous pourrez ensuite choisir un créneau.",
+    "beforePrice": "frais de déplacement non compris\ntarif: ",
+    "price": "Prix",
+    "free": "Gratuit",
+    "duration": "min",
+    "selectButton": "Choisir",
+    "selected": "✓ Sélectionné",
     "event30min": {
       "iconKey": "",
       "title": "Séance découverte de 30 minutes",
@@ -20,14 +27,9 @@
       "iconKey": "",
       "title": "Séance de 90 minutes",
       "description": "Bain + Brossage + Soins annexes"
-    },
-    "beforePrice": "frais de déplacement non compris\ntarif: ",
-    "price": "Prix",
-    "free": "Gratuit",
-    "duration": "min",
-    "selectButton": "Choisir",
-    "selected": "✓ Sélectionné"
+    }
   },
+
   "info": {
     "primary": "Informations pratiques",
     "secondary": "Tout ce que vous devez savoir sur la prise de rendez-vous.",
@@ -49,11 +51,13 @@
       }
     ]
   },
+
   "auth": {
     "title": "Connexion requise",
     "message": "Vous devez être connecté pour prendre un rendez-vous.",
     "button": "Retour à l'accueil"
   },
+
   "confirmation": {
     "title": "Réservation de rendez-vous envoyée !",
     "message": "[{eventType}] prévu pour le {date}.",
@@ -61,9 +65,11 @@
     "newBooking": "Prendre un autre rendez-vous",
     "goHome": "Retour à l'accueil"
   },
+
   "annulation": {
     "message": "Votre rendez-vous a été annulé. Vous pouvez en réserver un nouveau ci-dessous."
   },
+
   "chargement": "Chargement des disponibilités...",
   "erreur": "Impossible de charger le calendrier.",
   "reessayer": "Réessayer"
