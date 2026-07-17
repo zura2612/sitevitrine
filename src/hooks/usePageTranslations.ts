@@ -51,7 +51,7 @@ export function preloadAllTranslations() {
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const dateEnvoi = new Date().toLocaleString('fr-FR');
 console.log("entrée dans preloadAllTranslations() le ", dateEnvoi);
-console.log("usePageTranslations.ts VITE_BASE_URL=", baseUrl);
+//console.log("usePageTranslations.ts VITE_BASE_URL=", baseUrl);
 
   pages.forEach((page) => {
     if (!translationsCache[page]) { translationsCache[page] = {}; }

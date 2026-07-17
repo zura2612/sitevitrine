@@ -55,7 +55,7 @@ export function useMaintenanceStatus(): UseMaintenanceStatusResult {
       }
 
       // 3. Construire l'URL avec le paramètre site
-console.log(`useMaintenanceStatus: maintenance status for site "${siteName}" from worker URL: ${workerUrl}`);
+//console.log(`useMaintenanceStatus: maintenance status for site "${siteName}" from worker URL: ${workerUrl}`);
       const statusUrl = `${workerUrl}/api/status?site=${encodeURIComponent(siteName)}`;
 
       try {

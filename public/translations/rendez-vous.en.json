@@ -12,7 +12,7 @@
     "free": "Free",
     "duration": "min",
     "selectButton": "Select",
-    "selected": "✓ Selected"
+    "selected": "✓ Selected",
     "event30min": {
       "iconKey": "",
       "title": "30-minute discovery session",

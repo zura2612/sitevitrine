@@ -14,6 +14,8 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ProtectedRouteImport } from './routes/_protected'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminUtilisateurs1RouteImport } from './routes/admin.utilisateurs1'
+import { Route as AdminUtilisateursRouteImport } from './routes/admin.utilisateurs'
 import { Route as ProtectedRendezVousRouteImport } from './routes/_protected/rendez-vous'
 
 const ServicesRoute = ServicesRouteImport.update({
@@ -40,6 +42,16 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminUtilisateurs1Route = AdminUtilisateurs1RouteImport.update({
+  id: '/admin/utilisateurs1',
+  path: '/admin/utilisateurs1',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminUtilisateursRoute = AdminUtilisateursRouteImport.update({
+  id: '/admin/utilisateurs',
+  path: '/admin/utilisateurs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProtectedRendezVousRoute = ProtectedRendezVousRouteImport.update({
   id: '/rendez-vous',
   path: '/rendez-vous',
@@ -52,6 +64,8 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/services': typeof ServicesRoute
   '/rendez-vous': typeof ProtectedRendezVousRoute
+  '/admin/utilisateurs': typeof AdminUtilisateursRoute
+  '/admin/utilisateurs1': typeof AdminUtilisateurs1Route
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -59,6 +73,8 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/services': typeof ServicesRoute
   '/rendez-vous': typeof ProtectedRendezVousRoute
+  '/admin/utilisateurs': typeof AdminUtilisateursRoute
+  '/admin/utilisateurs1': typeof AdminUtilisateurs1Route
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -68,12 +84,28 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/services': typeof ServicesRoute
   '/_protected/rendez-vous': typeof ProtectedRendezVousRoute
+  '/admin/utilisateurs': typeof AdminUtilisateursRoute
+  '/admin/utilisateurs1': typeof AdminUtilisateurs1Route
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/contact' | '/services' | '/rendez-vous'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/services'
+    | '/rendez-vous'
+    | '/admin/utilisateurs'
+    | '/admin/utilisateurs1'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/services' | '/rendez-vous'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/services'
+    | '/rendez-vous'
+    | '/admin/utilisateurs'
+    | '/admin/utilisateurs1'
   id:
     | '__root__'
     | '/'
@@ -82,6 +114,8 @@ export interface FileRouteTypes {
     | '/contact'
     | '/services'
     | '/_protected/rendez-vous'
+    | '/admin/utilisateurs'
+    | '/admin/utilisateurs1'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -90,6 +124,8 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   ServicesRoute: typeof ServicesRoute
+  AdminUtilisateursRoute: typeof AdminUtilisateursRoute
+  AdminUtilisateurs1Route: typeof AdminUtilisateurs1Route
 }
 
 declare module '@tanstack/react-router' {
@@ -129,6 +165,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/utilisateurs1': {
+      id: '/admin/utilisateurs1'
+      path: '/admin/utilisateurs1'
+      fullPath: '/admin/utilisateurs1'
+      preLoaderRoute: typeof AdminUtilisateurs1RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/utilisateurs': {
+      id: '/admin/utilisateurs'
+      path: '/admin/utilisateurs'
+      fullPath: '/admin/utilisateurs'
+      preLoaderRoute: typeof AdminUtilisateursRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_protected/rendez-vous': {
       id: '/_protected/rendez-vous'
       path: '/rendez-vous'
@@ -157,6 +207,8 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   ServicesRoute: ServicesRoute,
+  AdminUtilisateursRoute: AdminUtilisateursRoute,
+  AdminUtilisateurs1Route: AdminUtilisateurs1Route,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

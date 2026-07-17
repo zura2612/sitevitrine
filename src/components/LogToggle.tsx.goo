@@ -1,0 +1,97 @@
+// src/components/LogToggle.tsx
+import { useAuth } from "@workos-inc/authkit-react";
+import { LogIn, LogOut, Loader2 } from "lucide-react";
+import { clearLastSelectedEvent } from "@/lib/last-event";
+import { BOOKING_STORAGE_KEY } from "@/lib/storage-keys";
+
+// 1. Des interfaces plus extensibles (permet d'ajouter des icônes custom ou des classes CSS à la volée)
+interface LogToggleProps {
+  labels: {
+    login: string;
+    logout: string;
+    loading: string;
+  };
+  className?: string; // Permet d'ajuster le style depuis le composant parent (ex: Navbar)
+  onLogoutSuccess?: () => void; // Callback optionnel si tu veux déclencher une action ailleurs lors du logout
+}
+
+export function LogToggle({ labels, className = "", onLogoutSuccess }: LogToggleProps) {
+  const { user, isLoading, signIn, signOut } = useAuth();
+
+  // 2. Centralisation de la logique de déconnexion
+  const handleLogout = async () => {
+    // Nettoyage des données locales
+    clearLastSelectedEvent();
+    try {
+      sessionStorage.removeItem(BOOKING_STORAGE_KEY);
+    } catch (error) {
+      console.warn("Échec du nettoyage de sessionStorage :", error);
+    }
+
+    // Callback externe éventuel (ex: fermer un menu mobile ouvert)
+    if (onLogoutSuccess) onLogoutSuccess();
+
+    // Déconnexion WorkOS
+    await signOut();
+  };
+
+  // Base des classes CSS partagées pour éviter la répétition (DRY - Don't Repeat Yourself)
+  const baseButtonStyles = `
+    inline-flex items-center justify-center gap-2 
+    rounded-xl px-4 py-2 text-sm font-semibold 
+    transition-all duration-200 active:scale-95
+    ${className}
+  `;
+
+  // --- Rendu conditionnel propre ---
+
+  // ÉTAT 1 : Chargement de la session
+  if (isLoading) {
+    return (
+      <button
+        disabled
+        className={`${baseButtonStyles} bg-gray-100 text-gray-400 cursor-not-allowed`}
+        aria-label={labels.loading}
+      >
+        <Loader2 className="h-4 w-4 animate-spin" />
+        <span>{labels.loading}</span>
+      </button>
+    );
+  }
+
+  // ÉTAT 2 : Utilisateur authentifié (Déconnexion)
+  if (user) {
+    return (
+      <button
+        onClick={handleLogout}
+        className={`${baseButtonStyles} bg-red-50 text-red-600 hover:bg-red-100 border border-red-200`}
+        aria-label={labels.logout}
+      >
+        <LogOut className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        <span>{labels.logout}</span>
+      </button>
+    );
+  }
+
+  // ÉTAT 3 : Invité (Connexion)
+  return (
+    <button
+      onClick={() => signIn()}
+      className={`${baseButtonStyles} bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm shadow-indigo-100`}
+      aria-label={labels.login}
+    >
+      <LogIn className="h-4 w-4" />
+      <span>{labels.login}</span>
+    </button>
+  );
+}
+/*3. Pourquoi ces changements ?
+Le style dynamique : Au lieu d'avoir un bouton transparent avec juste un hover:opacity-80, je lui donne une vraie identité
+ visuelle de site vitrine moderne (un bouton principal Indigo pour se connecter, et un bouton discret mais teinté de rouge pour se déconnecter).
+
+L'effet active:scale-95 : C'est un détail, mais quand l'utilisateur clique, le bouton s'enfonce légèrement. Sur mobile, 
+cela donne un feedback tactile immédiat excellent.
+
+La prop className : Si demain dans ta Navbar tu as besoin de centrer le bouton ou de le mettre en pleine largeur (w-full)
+ sur le menu mobile, tu as juste à faire <LogToggle className="w-full md:w-auto" labels="{...}"/>. Le composant est devenu réutilisable.
+*/
