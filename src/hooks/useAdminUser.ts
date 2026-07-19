@@ -52,13 +52,13 @@ export function useAdminUser() {
 
   // pour un projet donné metadata.role = name et metadata.slug = slug du rôle défini dans Authorization/Roles
   const isAdmin = adminUser?.metadata?.role === 'AdminSiteDev';
-if(adminUser) {
+/*if(adminUser) {
 console.log("hooks/useAdminUser.ts adminUser.metadata.role=", adminUser.metadata.role);
 console.log("hooks/useAdminUser.ts adminUser.metadata.slug=", adminUser.metadata.slug);
 console.log("hooks/useAdminUser.ts isAdmin=", isAdmin);
 console.log("Détail isAdmin :", adminUser );
 console.log("Détail isAdmin :", {fullAdminUser: adminUser} );
-} else console.log("hooks/useAdminUser.ts adminUser=null!");
+} else console.log("hooks/useAdminUser.ts adminUser=null!");*/
 
   return {
     adminUser,

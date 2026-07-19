@@ -18,8 +18,10 @@
     "login": "Se connecter",
     "logout": "Se déconnecter",
     "logoutSuccess": "Déconnexion réussie",
-    "loading": "Chargement..."
+    "loading": "Chargement...",
+    "connected": "connecté"
   },
+
   "mobileSections": {
     "language": "Langue",
     "display": "Affichage",

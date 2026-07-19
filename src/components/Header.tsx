@@ -130,7 +130,7 @@ export function Header() {
               <Zap className="h-4 w-4" /></span>*/}
             <img src="/favicon.ico" alt={`Logo ${siteConfig.entreprise}`} width={32} height={32}
               className="h-7 w-7 rounded-full object-cover"/>
-            <span className="text-base changer-couleur-effet">{siteConfig.entreprise}</span>
+            <span className="ml-2 text-base changer-couleur-effet">{siteConfig.entreprise}</span>
           </Link>
 
           {/* Items visibles du menu navigation selon l'état de l'authentification */}
@@ -152,11 +152,11 @@ export function Header() {
             {t.navigation.labels.map((label) => renderLabel(label, "desktop"))}
           </nav>
 
-          {/* Téléphone, CTA, langue, jour/nuit */}
+          {/* ex Téléphone, ex CTA, langue, jour/nuit */}
           <div className="hidden items-center gap-3 md:flex">
-            <a href={`tel:${siteConfig.phoneLink}`} className="flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline">
+            {/*<a href={`tel:${siteConfig.phoneLink}`} className="flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline">
               <Phone className="h-4 w-4" /> {siteConfig.phoneNumber}
-            </a>
+            </a>*/}
             {/*<Link to={t.navigation.cta.to} className={`${siteStyle.boutonStyle}`}>
               {t.navigation.cta.bouton}
             </Link>*/}
@@ -175,7 +175,8 @@ export function Header() {
                 login: t.tooltips.login,
                 logout: t.tooltips.logout,
                 logoutSuccess: t.tooltips.logoutSuccess,
-                loading: t.tooltips.loading
+                loading: t.tooltips.loading,
+                connected: t.tooltips.connected
               }}
             />
           </div>
@@ -210,15 +211,15 @@ export function Header() {
 
               <hr className="my-2 border-muted" />
 
-              <div className="flex flex-col items-start justify-start gap-2 w-full px-3 py-1 text-left">
+              {/*<div className="flex flex-col items-start justify-start gap-2 w-full px-3 py-1 text-left">
                 <a href={`tel:${siteConfig.phoneLink}`} className="flex items-center gap-2 text-sm font-semibold text-primary">
                   <Phone className="h-4 w-4" /> {siteConfig.phoneNumber}
                 </a>
-                {/*<Link to={t.navigation.cta.to}
+                <Link to={t.navigation.cta.to}
                   onClick={() => setOpen(false)}
                   className="border border-black inline-flex rounded-full bg-foreground px-4 py-2 text-sm font-semibold text-background transition hover:opacity-90 w-fit"
-                >{t.navigation.cta.bouton}</Link>*/}
-              </div>
+                >{t.navigation.cta.bouton}</Link>
+              </div>*/}
 
               <div className="mt-3 flex items-center gap-4 px-3">
                 <div className="flex flex-col gap-1">

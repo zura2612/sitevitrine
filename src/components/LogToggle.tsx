@@ -15,17 +15,15 @@ interface LogToggleProps {
     logout: string;
     loading: string;
     logoutSuccess: string;
+    connected: string;
   };
 }
 
-// ✅ Vérification du rôle administrateur via les métadonnées WorkOS
-/*const isUserAdmin = (user: any): boolean => {
-  if (!user) return false;
-  return (
-    user?.metadata?.role === 'AdminSiteDev' && 
-    user?.metadata?.slug === 'admin'
-  );
-};*/
+//const boutonStyle = "rounded-xl py-2 px-4 text-sm font-semibold text-center text-accent-foreground bg-accent tracking-wider transition hover:opacity-80";
+const boutonConnectedStyle = "rounded-xl px-4 py-2 text-sm font-semibold text-center tracking-wider transition hover:opacity-80";
+//className="rounded-xl px-4 py-2 text-sm font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors flex items-center gap-2";
+//className="rounded-xl px-4 py-2 text-sm font-semibold bg-gray-100 hover:bg-gray-200 transition-colors flex items-center gap-2 border border-gray-300";
+//className="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-colors text-left";
 
 export function LogToggle({ labels }: LogToggleProps) {
   //const { user, isLoading, signIn, signOut, getAccessToken } = useAuth(); //@workos-inc/authkit-react
@@ -77,7 +75,6 @@ export function LogToggle({ labels }: LogToggleProps) {
   };
 
   // État de chargement
-  //if (isLoading || isLoggingOut) {
   if (isLoading || isLoggingOut || isAdminLoading) {
     return (
       <button disabled className="rounded-xl px-4 py-2 text-sm font-semibold opacity-50 cursor-not-allowed flex items-center gap-2">
@@ -89,9 +86,9 @@ export function LogToggle({ labels }: LogToggleProps) {
 
   // ✅ UTILISATEUR CONNECTÉ : Afficher le prénom ou "Connecté" + Menu déroulant
   if (user) {
-    const displayName = user.firstName || "Connecté";
-    //const isAdmin = isUserAdmin(user);
-
+    //const displayName = user.firstName || "Connecté";
+    const displayName = user.firstName || labels.connected;
+   
     return (
       <div className="relative" ref={menuRef}>
         <Toaster position="top-right" duration={4000} />
@@ -99,7 +96,8 @@ export function LogToggle({ labels }: LogToggleProps) {
         {/* Bouton principal */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="rounded-xl px-4 py-2 text-sm font-semibold bg-gray-100 hover:bg-gray-200 transition-colors flex items-center gap-2 border border-gray-300"
+          className={boutonConnectedStyle}
+          //className="rounded-xl px-4 py-2 text-sm font-semibold bg-gray-100 hover:bg-gray-200 transition-colors flex items-center gap-2 border border-gray-300"
           aria-expanded={isMenuOpen}
           aria-haspopup="true"
         >

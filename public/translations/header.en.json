@@ -18,7 +18,8 @@
     "login": "Log in",
     "logout": "Log out",
     "logoutSuccess": "Successfully signed out",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "connected": "connected"
   },
   "mobileSections": {
     "language": "Language",

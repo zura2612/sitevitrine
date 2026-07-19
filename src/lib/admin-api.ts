@@ -8,13 +8,13 @@ export async function callAdminApi(
 ) {
   try {
     if (!ADMIN_WORKER_URL) {
-      throw new Error("VITE_ADMIN_WORKER_URL est manquant dans le fichier .env du projet front !");
+      throw new Error("admin-api.ts: VITE_ADMIN_WORKER_URL est manquant dans le fichier .env du projet front !");
     }
 
     const accessToken = await getAccessToken();
     
     if (!accessToken || accessToken.length < 50) {
-      throw new Error('Non authentifié : le token d\'accès est manquant ou invalide');
+      throw new Error('admin-api.ts: Non authentifié : le token d\'accès est manquant ou invalide');
     }
 
     // ✅ NOUVEAU : Décoder le payload du JWT pour voir son contenu
@@ -27,15 +27,15 @@ export async function callAdminApi(
         }).join('')
       );
       const payload = JSON.parse(jsonPayload);
-      console.log("🔍 PAYLOAD DU JWT:", payload);
+      /*console.log("🔍 PAYLOAD DU JWT:", payload);
       console.log("🔍 Audience (aud):", payload.aud);
-      console.log("🔍 Expiration (exp):", new Date(payload.exp * 1000).toLocaleString());
+      console.log("🔍 Expiration (exp):", new Date(payload.exp * 1000).toLocaleString());*/
     } catch (e) {
-      console.warn("Impossible de décoder le JWT", e);
+      console.warn("admin-api.ts: Impossible de décoder le JWT", e);
     }
 
     const fullUrl = `${ADMIN_WORKER_URL}${endpoint}`;
-    console.log(`[Admin API] Appel vers : ${fullUrl}`);
+    //console.log(`[Admin API] Appel vers : ${fullUrl}`);
 
     const response = await fetch(fullUrl, {
       method: 'GET',
@@ -51,20 +51,19 @@ export async function callAdminApi(
       try {
         errorData = JSON.parse(rawText);
       } catch {
-        errorData = { error: `Réponse non-JSON (Status ${response.status}) : ${rawText.substring(0, 150)}...` };
+        errorData = { error: `admin-api.ts: Réponse non-JSON (Status ${response.status}) : ${rawText.substring(0, 150)}...` };
       }
       
       if (response.status === 401) {
-        console.error("[Admin API] Le worker a rejeté le token. Détail :", errorData);
-        throw new Error('Session expirée ou token invalide, veuillez vous reconnecter');
-      }
-      
-      throw new Error(errorData.error || `Erreur API: ${response.status}`);
+        console.error("admin-api.ts Le worker a rejeté le token. Détail :", errorData);
+        throw new Error('admin-api.ts Session expirée ou token invalide, veuillez vous reconnecter');
+      } 
+      throw new Error(errorData.error || `admin-api.ts: Erreur API: ${response.status}`);
     }
 
     return response.json();
   } catch (error) {
-    console.error(`[Admin API] Échec critique sur ${endpoint}:`, error);
+    console.error(`admin-api.ts: Échec critique sur ${endpoint}:`, error);
     throw error;
   }
 }

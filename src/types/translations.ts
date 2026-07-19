@@ -123,6 +123,7 @@ export interface HeaderTranslations {
     logout: string;
     logoutSuccess: string; // label du toast
     loading: string;
+    connected: string;
   };
   
   mobileSections: {
