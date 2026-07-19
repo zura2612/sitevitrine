@@ -4,7 +4,8 @@ import { useAuth } from "@workos-inc/authkit-react";
 import { Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
-import { LogIn, LogOut, Loader2, ChevronDown, Shield } from "lucide-react";
+// ✅ Ajout de BarChart3 dans les imports lucide-react
+import { LogIn, LogOut, Loader2, ChevronDown, Shield, BarChart3 } from "lucide-react";
 import { clearLastSelectedEvent } from "@/lib/last-event";
 import { BOOKING_STORAGE_KEY } from "@/lib/storage-keys";
 import { useAdminUser } from "@/hooks/useAdminUser";
@@ -19,28 +20,14 @@ interface LogToggleProps {
   };
 }
 
-//const boutonStyle = "rounded-xl py-2 px-4 text-sm font-semibold text-center text-accent-foreground bg-accent tracking-wider transition hover:opacity-80";
 const boutonConnectedStyle = "rounded-xl px-4 py-2 text-sm font-semibold text-center tracking-wider transition hover:opacity-80";
-//className="rounded-xl px-4 py-2 text-sm font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors flex items-center gap-2";
-//className="rounded-xl px-4 py-2 text-sm font-semibold bg-gray-100 hover:bg-gray-200 transition-colors flex items-center gap-2 border border-gray-300";
-//className="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-colors text-left";
 
 export function LogToggle({ labels }: LogToggleProps) {
-  //const { user, isLoading, signIn, signOut, getAccessToken } = useAuth(); //@workos-inc/authkit-react
-  const { user, isLoading, signIn, signOut } = useAuth(); //@workos-inc/authkit-react
-  const { adminUser, isLoading: isAdminLoading, isAdmin } = useAdminUser(); //@/hooks/useAdminUser
+  const { user, isLoading, signIn, signOut } = useAuth();
+  const { adminUser, isLoading: isAdminLoading, isAdmin } = useAdminUser();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-
-// pour débogage
-/*  useEffect(() => {
-    if (user) {
-      console.log("Structure complète de l'utilisateur WorkOS :", JSON.stringify(user, null, 2));
-      console.log("user.email :", user.email);
-      //console.log("user.profile :", (user as any).profile);
-    }
-  }, [user]);*/
 
   // Fermer le menu si on clique en dehors
   useEffect(() => {
@@ -59,7 +46,7 @@ export function LogToggle({ labels }: LogToggleProps) {
 
   const handleLogout = async () => {
     setIsLoggingOut(true);
-    setIsMenuOpen(false); // Fermer le menu immédiatement
+    setIsMenuOpen(false);
     clearLastSelectedEvent();
     
     try {
@@ -84,9 +71,8 @@ export function LogToggle({ labels }: LogToggleProps) {
     );
   }
 
-  // ✅ UTILISATEUR CONNECTÉ : Afficher le prénom ou "Connecté" + Menu déroulant
+  // ✅ UTILISATEUR CONNECTÉ
   if (user) {
-    //const displayName = user.firstName || "Connecté";
     const displayName = user.firstName || labels.connected;
    
     return (
@@ -97,7 +83,6 @@ export function LogToggle({ labels }: LogToggleProps) {
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className={boutonConnectedStyle}
-          //className="rounded-xl px-4 py-2 text-sm font-semibold bg-gray-100 hover:bg-gray-200 transition-colors flex items-center gap-2 border border-gray-300"
           aria-expanded={isMenuOpen}
           aria-haspopup="true"
         >
@@ -105,20 +90,37 @@ export function LogToggle({ labels }: LogToggleProps) {
           <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isMenuOpen ? 'rotate-180' : ''}`} />
         </button>
 
-        {/* Menu déroulant (Tailwind pur) */}
+        {/* Menu déroulant */}
         {isMenuOpen && (
           <div className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
             
-            {/* Item Administrer (Conditionnel) */}
+            {/* ✅ Menu Administrer scindé en deux si isAdmin */}
             {isAdmin && (
-              <Link
-                to="/admin/utilisateurs"
-                onClick={() => setIsMenuOpen(false)}
-                className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors border-b border-gray-100"
-              >
-                <Shield className="h-4 w-4 text-blue-600" />
-                <span className="font-medium text-blue-700">Administrer</span>
-              </Link>
+              <>
+                <div className="px-4 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider bg-gray-50 border-b border-gray-100">
+                  Administration
+                </div>
+                
+                {/* Lien vers la gestion des utilisateurs */}
+                <Link
+                  to="/admin/utilisateurs"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                >
+                  <Shield className="h-4 w-4 text-blue-600" />
+                  <span>Utilisateurs</span>
+                </Link>
+
+                {/* Lien vers la page des statistiques */}
+                <Link
+                  to="/admin/statistiques"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors border-b border-gray-100"
+                >
+                  <BarChart3 className="h-4 w-4 text-blue-600" />
+                  <span>Statistiques</span>
+                </Link>
+              </>
             )}
 
             {/* Item Se déconnecter */}
@@ -135,7 +137,7 @@ export function LogToggle({ labels }: LogToggleProps) {
     );
   }
 
-  // ✅ UTILISATEUR NON CONNECTÉ : Comportement actuel
+  // ✅ UTILISATEUR NON CONNECTÉ
   return (
     <>
       <Toaster position="top-right" duration={4000} />
