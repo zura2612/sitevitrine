@@ -10,19 +10,21 @@ import { useAuth } from '@workos-inc/authkit-react';// Hook WorkOS
 import { LanguageProvider, useLanguage } from '../contexts/LanguageContext';
 import { preloadAllTranslations } from "../hooks/usePageTranslations";
 import appCss from '../styles.css?url';
-import { siteConfig } from "../config/site";
+
+// Imports de la logique de traduction
 import { usePageTranslations } from "../hooks/usePageTranslations";
 import type { NotFoundTranslations } from "../types/translations";
+
+// import des constantes d'environnement
+import { siteConfig } from "../config/site";
 
 function NotFoundComponent() {
   const { lang } = useLanguage();
    // Chargement asynchrone typé manuellement
-  const { data: t, isLoading, error } = usePageTranslations<NotFoundTranslations>("__root", lang);
-    
-  if (isLoading) return <p className="text-center py-10 animate-pulse" aria-live="polite">
-    Chargement du contenu de NotFoundComponent...</p>;
-  if (error || !t) return <p className="text-center py-10 text-destructive" role="alert">
-    {error instanceof Error ? error.message : "Impossible de charger les textes."}</p>;
+  const { data:t, error } = usePageTranslations<NotFoundTranslations>("__root", lang);
+  if (error || !t)
+    return <p className="text-center py-10 text-destructive" role="alert">
+    {error instanceof Error ? error.message : "Impossible de charger les textes de __root"}</p>;
 
   return (
     <div className="container-narrow py-20 text-center">

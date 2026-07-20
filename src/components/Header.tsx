@@ -14,6 +14,7 @@ import { usePageTranslations } from "@/hooks/usePageTranslations";
 import type { HeaderTranslations } from "@/types/translations";
 import { siteConfig } from "@/config/site";
 import { siteStyle } from "@/config/site";
+import frHeaderTranslations from "../../public/translations/header.fr.json";// on est dans src/components
 
 const sectionStyle = "mb-1 border border-black container-narrow";
 const boutonStyle = "rounded-xl px-4 py-2 text-sm font-semibold text-center tracking-wider transition hover:opacity-80";
@@ -25,11 +26,11 @@ export function Header() {
   const [authModalMessage, setAuthModalMessage] = useState("");
 
   const { lang } = useLanguage();
-  const { data: t, isLoading, error } = usePageTranslations<HeaderTranslations>("header", lang);
-  //const { isAuthenticated, isLoading: isAuthLoading } = useAuth0(); // état de connexion de l'utilisateur
-  // ✅ Hook WorkOS : user est null si non connecté
+  const { data:t, error } = usePageTranslations<HeaderTranslations>("header", lang);
+  
   const { user, isLoading: isAuthLoading } = useAuth();
   const isAuthenticated = !!user;
+  //const t = data || (frHeaderTranslations as unknown as HeaderTranslations);
 
   // Handlers pour le modal
   const openAuthModal = (message: string) => {
@@ -39,19 +40,19 @@ export function Header() {
   const closeAuthModal = () => { setAuthModalOpen(false); };
 
   // ✅ Toujours <header> comme nœud racine — évite le démontage de l'arbre enfant
-  if (isLoading) return (
+  /*if (isLoading) return (
     <header className="mb-1 sticky top-0 z-100 backdrop-blur-md">
       <section className={sectionStyle}>
         <div className="flex h-16 items-center justify-between animate-pulse" />
       </section>
     </header>
-  );
+  );*/
 
   if (error || !t) return (
     <header className="mb-1 sticky top-0 z-100 backdrop-blur-md">
       <section className={sectionStyle}>
         <p className="text-center py-4 text-destructive" role="alert">
-          {error instanceof Error ? error.message : "Impossible de charger les textes."}
+          {error instanceof Error ? error.message : "Impossible de charger les textes de header"}
         </p>
       </section>
     </header>

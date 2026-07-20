@@ -4,27 +4,29 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { usePageTranslations } from "@/hooks/usePageTranslations";
 import type { FooterTranslations } from "@/types/translations";
 import { siteConfig } from "@/config/site";
+import frFooterTranslations from "../../public/translations/footer.fr.json";// on est dans src/components
 
 const sectionStyle = "mb-1 border border-black container-narrow";
 const currentYear = new Date().getFullYear();
 
 export function Footer() {
   const { lang } = useLanguage();
-  const { data: t, isLoading, error } = usePageTranslations<FooterTranslations>("footer", lang);
+  const { data:t, error } = usePageTranslations<FooterTranslations>("footer", lang);
+  //const t = data || (frFooterTranslations as unknown as FooterTranslations);
 
-  if (isLoading) return (
+  /*if (isLoading) return (
     <footer className="">
       <section className={sectionStyle}>
         <div className="flex h-16 items-center animate-pulse" />
       </section>
     </footer>
-  );
+  );*/
 
   if (error || !t) return (
     <footer className="">
       <section className={sectionStyle}>
         <p className="text-center py-4 text-destructive" role="alert">
-          {error instanceof Error ? error.message : "Impossible de charger les textes."}
+          {error instanceof Error ? error.message : "Impossible de charger les textes de footer"}
         </p>
       </section>
     </footer>

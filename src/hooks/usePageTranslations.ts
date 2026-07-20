@@ -1,13 +1,51 @@
 // fichier src/hooks/usePageTranslations.ts
 import { useState, useEffect } from 'react';
 
+// Importation statique des fichiers français pour court-circuiter le réseau
+/*import frHeader from "../../public/translations/header.fr.json";
+import frFooter from "../../public/translations/footer.fr.json";
+import frCtaBand from "../../public/translations/ctaBand.fr.json";
+import frAbout from "../../public/translations/about.fr.json";
+import frContact from "../../public/translations/contact.fr.json";
+import frHome from "../../public/translations/home.fr.json";
+import frRendezVous from "../../public/translations/rendez-vous.fr.json";
+import frServices from "../../public/translations/services.fr.json";*/
+
+// 🟢 MODIFICATION : On demande à Vite de lire dynamiquement mais immédiatement (eager) les fichiers JSON du dossier public
+// Cela contourne l'interdiction d'importation directe tout en intégrant les données au build.
+const frFiles = import.meta.glob('/public/translations/*.fr.json', { eager: true });
+
+// Fonction utilitaire pour extraire proprement les données lues par Vite
+const getFrData = (pageName: string) => {
+  // Les clés dans frFiles ressemblent à : "/public/translations/home.fr.json"
+  const key = `/public/translations/${pageName}.fr.json`;
+  const fileContent = frFiles[key] as any;
+  // Vite exporte le JSON sous une clé "default"
+  return fileContent ? fileContent.default : null;
+};
+
 // Cache pour stocker les traductions pré-chargées
-const translationsCache: Record<string, Record<string, any>> = {};
+// On initialise directement le cache avec les données FR pour éviter l'asynchrone
+const translationsCache: Record<string, Record<string, any>> = {
+  __root: { fr: getFrData('__root') },
+  header: { fr: getFrData('header') },
+  footer: { fr: getFrData('footer') },
+  ctaBand: { fr: getFrData('ctaBand') },
+  about: { fr: getFrData('about') },
+  contact: { fr: getFrData('contact') },
+  home: { fr: getFrData('home') },
+  "rendez-vous": { fr: getFrData('rendez-vous') },
+  services: { fr: getFrData('services') }
+};
+
+// Cache pour stocker les traductions pré-chargées
+//const translationsCache: Record<string, Record<string, any>> = {};
 
 // Signature générique pour conserver le typage côté appelant
 export function usePageTranslations<T>(page: string, lang: string) {
-  const [data, setData] = useState<T | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const cachedData = translationsCache[page]?.[lang];
+  const [data, setData] = useState<T | null>((cachedData as T) || null);
+  const [isLoading, setIsLoading] = useState(!cachedData); 
   const [error, setError] = useState<Error | null>(null);
 
 useEffect(() => {
@@ -19,6 +57,9 @@ useEffect(() => {
           setIsLoading(false);
           return;
           }
+
+        // Sécurité pour le serveur de build (SSG) : pas de fetch hors du navigateur
+        if (typeof window === "undefined") return;
 
         const response = await fetch(`/translations/${page}.${lang}.json`);
         if (!response.ok) { throw new Error(`Failed to load translations for ${page} (${lang})`); }
@@ -47,11 +88,13 @@ useEffect(() => {
 // Fonction pour pré-charger toutes les traductions
 export function preloadAllTranslations() {
   const pages = ["header", "footer", "ctaBand", "about", "contact", "home", "rendez-vous", "services"];
-  const languages = ["fr", "en"];
+  const languages = ["en"];
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const dateEnvoi = new Date().toLocaleString('fr-FR');
 console.log("entrée dans preloadAllTranslations() le ", dateEnvoi);
-//console.log("usePageTranslations.ts VITE_BASE_URL=", baseUrl);
+
+// Sécurité indispensable pour éviter que le serveur Node de TanStack ne tente de lancer des fetch globaux au build
+  if (typeof window === "undefined") return;
 
   pages.forEach((page) => {
     if (!translationsCache[page]) { translationsCache[page] = {}; }

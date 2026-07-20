@@ -7,6 +7,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 // imports de la logique de traduction
 import { usePageTranslations } from "@/hooks/usePageTranslations";
 import type { AboutTranslations } from "@/types/translations";
+import frAboutTranslations from "../../public/translations/about.fr.json";// on est dans src/routes
 
 // import des constantes d'environnement
 import {siteConfig} from "@/config/site";
@@ -22,16 +23,16 @@ import imgPortrait from "@/assets/portrait.jpg";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-	  { title: `${siteConfig.entreprise} - A propos` },
+    { title: `${siteConfig.entreprise} - A propos` },
     { name: "description", content: siteConfig.headDescriptionAbout },
-	  { name: "robots", content: "index, follow" },
+    { name: "robots", content: "index, follow" },
     { name: "canonical", content: `${siteConfig.urlSite}/about` },
     { property: "og:title", content: `${siteConfig.entreprise} — A propos` },
     { property: "og:description", content: siteConfig.headDescriptionAbout },
-	  { property: "og:type", content: "website" },
-	  { property: "og:url", content: `${siteConfig.urlSite}/about` },
-	  { property: "og:image", content: `${siteConfig.urlSite}/public/vehicule.jpg` },
-	  { property: "og:site_name", content: siteConfig.entreprise },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: `${siteConfig.urlSite}/about` },
+    { property: "og:image", content: `${siteConfig.urlSite}/public/vehicule.jpg` },
+    { property: "og:site_name", content: siteConfig.entreprise },
     ],
   }),
   component: AboutPage,
@@ -40,12 +41,11 @@ export const Route = createFileRoute("/about")({
 
 function AboutPage() {
   const { lang } = useLanguage();
-  // Chargement asynchrone typé manuellement
-  const { data: t, isLoading, error } = usePageTranslations<AboutTranslations>("about", lang);
-
-  if (isLoading) return <p className="text-center py-10 animate-pulse" aria-live="polite">Chargement du contenu de AboutPage...</p>;
-  if (error || !t) return <p className="text-center py-10 text-destructive" role="alert">
-  {error instanceof Error ? error.message : "Impossible de charger les textes."}</p>;
+  const { data:t, error } = usePageTranslations<AboutTranslations>("about", lang);
+  //const t = data || (frAboutTranslations as unknown as AboutTranslations);
+  if (error || !t)
+    return <p className="text-center py-10 text-destructive" role="alert">
+    {error instanceof Error ? error.message : "Impossible de charger les textes de la page about"}</p>;
   
   // Remplace les variables dynamiques (ex: {entreprise}) dans les textes traduits
   const champHeroSecondary = t.hero.secondary.replace("{entreprise}", siteConfig.entreprise);

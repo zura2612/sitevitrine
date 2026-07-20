@@ -4,8 +4,13 @@ import { useState, useEffect, useRef } from "react";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { useLanguage } from "@/contexts/LanguageContext";
+
+// Imports de la logique de traduction
 import { usePageTranslations } from "@/hooks/usePageTranslations";
 import type { ContactTranslations } from "@/types/translations";
+import frContactTranslations from "../../public/translations/contact.fr.json";// on est dans src/routes
+
+// import des constantes d'environnement
 import { siteConfig } from "@/config/site";
 import { siteStyle } from "@/config/site";
 
@@ -39,14 +44,17 @@ export const Route = createFileRoute("/contact")({
 
 function ContactPage() {
   const { lang } = useLanguage();
-  const { project: projectFromUrl } = Route.useSearch();
+  const { data:t, error } = usePageTranslations<ContactTranslations>("contact", lang);
+  //const t = data || (frContactTranslations as unknown as ContactTranslations);
+  if (error || !t)
+    return <p className="text-center py-10 text-destructive" role="alert">
+    {error instanceof Error ? error.message : "Impossible de charger les textes de la page contact"}</p>;
 
+  const { project: projectFromUrl } = Route.useSearch();
   const projectFromUrlRef = useRef(projectFromUrl);
   const [isSending, setIsSending] = useState(false);
   const [selectedProject, setSelectedProject] = useState<string>("");
   const [initialized, setInitialized] = useState(false);
-
-  const { data: t, isLoading, error } = usePageTranslations<ContactTranslations>("contact", lang);
 
   useEffect(() => {
     if (t && !initialized) {
@@ -54,28 +62,6 @@ function ContactPage() {
       setInitialized(true);
     }
   }, [t, initialized]);
-
-  if (isLoading) {
-    return (
-      <main className="w-full">
-        <section className={sectionStyle}>
-          <div className="flex h-16 items-center animate-pulse" />
-        </section>
-      </main>
-    );
-  }
-
-  if (error || !t) {
-    return (
-      <main className="w-full">
-        <section className={sectionStyle}>
-          <p className="text-center py-4 text-destructive" role="alert">
-            {error instanceof Error ? error.message : "Impossible de charger les textes."}
-          </p>
-        </section>
-      </main>
-    );
-  }
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

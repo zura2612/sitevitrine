@@ -15,8 +15,6 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as ProtectedRouteImport } from './routes/_protected'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminUtilisateursRouteImport } from './routes/admin.utilisateurs'
-import { Route as AdminStatistiques2RouteImport } from './routes/admin.statistiques2'
-import { Route as AdminStatistiques1RouteImport } from './routes/admin.statistiques1'
 import { Route as AdminStatistiquesRouteImport } from './routes/admin.statistiques'
 import { Route as ProtectedRendezVousRouteImport } from './routes/_protected/rendez-vous'
 
@@ -49,16 +47,6 @@ const AdminUtilisateursRoute = AdminUtilisateursRouteImport.update({
   path: '/admin/utilisateurs',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminStatistiques2Route = AdminStatistiques2RouteImport.update({
-  id: '/admin/statistiques2',
-  path: '/admin/statistiques2',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminStatistiques1Route = AdminStatistiques1RouteImport.update({
-  id: '/admin/statistiques1',
-  path: '/admin/statistiques1',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AdminStatistiquesRoute = AdminStatistiquesRouteImport.update({
   id: '/admin/statistiques',
   path: '/admin/statistiques',
@@ -77,8 +65,6 @@ export interface FileRoutesByFullPath {
   '/services': typeof ServicesRoute
   '/rendez-vous': typeof ProtectedRendezVousRoute
   '/admin/statistiques': typeof AdminStatistiquesRoute
-  '/admin/statistiques1': typeof AdminStatistiques1Route
-  '/admin/statistiques2': typeof AdminStatistiques2Route
   '/admin/utilisateurs': typeof AdminUtilisateursRoute
 }
 export interface FileRoutesByTo {
@@ -88,8 +74,6 @@ export interface FileRoutesByTo {
   '/services': typeof ServicesRoute
   '/rendez-vous': typeof ProtectedRendezVousRoute
   '/admin/statistiques': typeof AdminStatistiquesRoute
-  '/admin/statistiques1': typeof AdminStatistiques1Route
-  '/admin/statistiques2': typeof AdminStatistiques2Route
   '/admin/utilisateurs': typeof AdminUtilisateursRoute
 }
 export interface FileRoutesById {
@@ -101,8 +85,6 @@ export interface FileRoutesById {
   '/services': typeof ServicesRoute
   '/_protected/rendez-vous': typeof ProtectedRendezVousRoute
   '/admin/statistiques': typeof AdminStatistiquesRoute
-  '/admin/statistiques1': typeof AdminStatistiques1Route
-  '/admin/statistiques2': typeof AdminStatistiques2Route
   '/admin/utilisateurs': typeof AdminUtilisateursRoute
 }
 export interface FileRouteTypes {
@@ -114,8 +96,6 @@ export interface FileRouteTypes {
     | '/services'
     | '/rendez-vous'
     | '/admin/statistiques'
-    | '/admin/statistiques1'
-    | '/admin/statistiques2'
     | '/admin/utilisateurs'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -125,8 +105,6 @@ export interface FileRouteTypes {
     | '/services'
     | '/rendez-vous'
     | '/admin/statistiques'
-    | '/admin/statistiques1'
-    | '/admin/statistiques2'
     | '/admin/utilisateurs'
   id:
     | '__root__'
@@ -137,8 +115,6 @@ export interface FileRouteTypes {
     | '/services'
     | '/_protected/rendez-vous'
     | '/admin/statistiques'
-    | '/admin/statistiques1'
-    | '/admin/statistiques2'
     | '/admin/utilisateurs'
   fileRoutesById: FileRoutesById
 }
@@ -149,8 +125,6 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   ServicesRoute: typeof ServicesRoute
   AdminStatistiquesRoute: typeof AdminStatistiquesRoute
-  AdminStatistiques1Route: typeof AdminStatistiques1Route
-  AdminStatistiques2Route: typeof AdminStatistiques2Route
   AdminUtilisateursRoute: typeof AdminUtilisateursRoute
 }
 
@@ -198,20 +172,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminUtilisateursRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/statistiques2': {
-      id: '/admin/statistiques2'
-      path: '/admin/statistiques2'
-      fullPath: '/admin/statistiques2'
-      preLoaderRoute: typeof AdminStatistiques2RouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/statistiques1': {
-      id: '/admin/statistiques1'
-      path: '/admin/statistiques1'
-      fullPath: '/admin/statistiques1'
-      preLoaderRoute: typeof AdminStatistiques1RouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/admin/statistiques': {
       id: '/admin/statistiques'
       path: '/admin/statistiques'
@@ -248,8 +208,6 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   ServicesRoute: ServicesRoute,
   AdminStatistiquesRoute: AdminStatistiquesRoute,
-  AdminStatistiques1Route: AdminStatistiques1Route,
-  AdminStatistiques2Route: AdminStatistiques2Route,
   AdminUtilisateursRoute: AdminUtilisateursRoute,
 }
 export const routeTree = rootRouteImport

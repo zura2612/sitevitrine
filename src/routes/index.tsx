@@ -13,6 +13,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 // Imports de la logique de traduction
 import { usePageTranslations } from "@/hooks/usePageTranslations";
 import type { HomeTranslations } from "@/types/translations";
+import frHomeTranslations from "../../public/translations/home.fr.json";// on est dans src/routes
 
 // import des images
 import imgVehicule from "@/assets/vehicule.jpg";
@@ -48,20 +49,19 @@ export const Route = createFileRoute('/') ({
 
 function HomePage() {
   const { lang } = useLanguage();
-  // Chargement asynchrone typé manuellement
-  const { data: t, isLoading, error } = usePageTranslations<HomeTranslations>("home", lang);
-
-  if (isLoading) return <p className="text-center py-10 animate-pulse" aria-live="polite">Chargement du contenu de HomePage...</p>;
-  if (error || !t) return <p className="text-center py-10 text-destructive" role="alert">
-  {error instanceof Error ? error.message : "Impossible de charger les textes."}</p>;
+  const { data:t, error } = usePageTranslations<HomeTranslations>("home", lang);
+  //const t = data || (frHomeTranslations as unknown as HomeTranslations);
+  if (error || !t)
+    return <p className="text-center py-10 text-destructive" role="alert">
+    {error instanceof Error ? error.message : "Impossible de charger les textes de la page home"}</p>;
   
   // assurer la cohérence entre les icones des home.xx.json, les icones importées et homeIconMap
   const homeIconMap: Record<string, React.ElementType> = {
-	Award: Award,
-	Clock: Clock,
-  Lightbulb: Lightbulb,
-  PlugZap: PlugZap,
-	ShieldCheck: ShieldCheck
+    Award: Award,
+    Clock: Clock,
+    Lightbulb: Lightbulb,
+    PlugZap: PlugZap,
+    ShieldCheck: ShieldCheck
   };
 	
   // Mapping des clés du JSON vers les images importées
@@ -102,8 +102,8 @@ function HomePage() {
            {t.trustbar.items.map(({ iconKey, label }) => {
            const Icon = homeIconMap[iconKey];
            return (
-		     <div key={label} className="flex items-center justify-center gap-2 text-sm font-medium text-foreground/80">
-             <Icon className="h-4 w-4 text-primary" /> {label}
+	     <div key={label} className="flex items-center justify-center gap-2 text-sm font-medium text-foreground/80">
+               <Icon className="h-4 w-4 text-primary" /> {label}
              </div> );
 		  })}
         </div>

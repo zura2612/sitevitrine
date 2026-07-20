@@ -7,6 +7,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 // Imports de la logique de traduction
 import { usePageTranslations } from "@/hooks/usePageTranslations";
 import type { ServicesTranslations } from "@/types/translations";
+import frServicesTranslations from "../../public/translations/services.fr.json";// on est dans src/routes
 
 // import des constantes d'environnement
 import {siteConfig} from "@/config/site";
@@ -34,11 +35,11 @@ export const Route = createFileRoute("/services")({
 
 function ServicesPage() {
   const { lang } = useLanguage();
-  // Chargement asynchrone typé manuellement
-  const { data: t, isLoading, error } = usePageTranslations<ServicesTranslations>("services", lang);
-  if (isLoading) return <p className="text-center py-10 animate-pulse" aria-live="polite">Chargement du contenu de ServicesPage...</p>;
-  if (error || !t) return <p className="text-center py-10 text-destructive" role="alert">
-  {error instanceof Error ? error.message : "Impossible de charger les textes."}</p>;
+  const { data:t, error } = usePageTranslations<ServicesTranslations>("services", lang);
+  //const t = data || (frServicesTranslations as unknown as ServicesTranslations);
+  if (error || !t)
+    return <p className="text-center py-10 text-destructive" role="alert">
+    {error instanceof Error ? error.message : "Impossible de charger les textes de la page services"}</p>;
   
   // Mapping des clés du JSON vers les icônes Lucide
   const servicesIconMap: Record<string, React.ElementType> = {
