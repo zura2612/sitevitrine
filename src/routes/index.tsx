@@ -13,7 +13,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 // Imports de la logique de traduction
 import { usePageTranslations } from "@/hooks/usePageTranslations";
 import type { HomeTranslations } from "@/types/translations";
-import frHomeTranslations from "../../public/translations/home.fr.json";// on est dans src/routes
+//import frHomeTranslations from "../../src/translations/home.fr.json";// on est dans src/routes
 
 // import des images
 import imgVehicule from "@/assets/vehicule.jpg";

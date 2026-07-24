@@ -4,7 +4,6 @@ import { useAuth } from "@workos-inc/authkit-react";
 import { Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
-// ✅ Ajout de BarChart3 dans les imports lucide-react
 import { LogIn, LogOut, Loader2, ChevronDown, Shield, BarChart3 } from "lucide-react";
 import { clearLastSelectedEvent } from "@/lib/last-event";
 import { BOOKING_STORAGE_KEY } from "@/lib/storage-keys";

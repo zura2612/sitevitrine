@@ -7,7 +7,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 // Imports de la logique de traduction
 import { usePageTranslations } from "@/hooks/usePageTranslations";
 import type { ServicesTranslations } from "@/types/translations";
-import frServicesTranslations from "../../public/translations/services.fr.json";// on est dans src/routes
+//import frServicesTranslations from "../../src/translations/services.fr.json";// on est dans src/routes
 
 // import des constantes d'environnement
 import {siteConfig} from "@/config/site";

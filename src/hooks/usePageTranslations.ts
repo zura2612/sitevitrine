@@ -11,14 +11,15 @@ import frHome from "../../public/translations/home.fr.json";
 import frRendezVous from "../../public/translations/rendez-vous.fr.json";
 import frServices from "../../public/translations/services.fr.json";*/
 
-// 🟢 MODIFICATION : On demande à Vite de lire dynamiquement mais immédiatement (eager) les fichiers JSON du dossier public
+// 🟢 MODIFICATION : On demande à Vite de lire dynamiquement mais immédiatement (eager) les fichiers .fr.json du dossier src/translations
 // Cela contourne l'interdiction d'importation directe tout en intégrant les données au build.
-const frFiles = import.meta.glob('/public/translations/*.fr.json', { eager: true });
+//const frFiles = import.meta.glob('/public/translations/*.fr.json', { eager: true });
+const frFiles = import.meta.glob('/src/translations/*.fr.json', { eager: true });
 
 // Fonction utilitaire pour extraire proprement les données lues par Vite
 const getFrData = (pageName: string) => {
-  // Les clés dans frFiles ressemblent à : "/public/translations/home.fr.json"
-  const key = `/public/translations/${pageName}.fr.json`;
+  // Les clés dans frFiles ressemblent à : "/src/translations/home.fr.json"
+  const key = `/src/translations/${pageName}.fr.json`;
   const fileContent = frFiles[key] as any;
   // Vite exporte le JSON sous une clé "default"
   return fileContent ? fileContent.default : null;
@@ -91,7 +92,7 @@ export function preloadAllTranslations() {
   const languages = ["en"];
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const dateEnvoi = new Date().toLocaleString('fr-FR');
-console.log("entrée dans preloadAllTranslations() le ", dateEnvoi);
+  console.log("entrée dans preloadAllTranslations() le ", dateEnvoi);
 
 // Sécurité indispensable pour éviter que le serveur Node de TanStack ne tente de lancer des fetch globaux au build
   if (typeof window === "undefined") return;

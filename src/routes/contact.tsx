@@ -8,7 +8,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 // Imports de la logique de traduction
 import { usePageTranslations } from "@/hooks/usePageTranslations";
 import type { ContactTranslations } from "@/types/translations";
-import frContactTranslations from "../../public/translations/contact.fr.json";// on est dans src/routes
+//import frContactTranslations from "../../src/translations/contact.fr.json";// on est dans src/routes
 
 // import des constantes d'environnement
 import { siteConfig } from "@/config/site";

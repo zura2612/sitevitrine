@@ -12,18 +12,23 @@ type LanguageContextType = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-// ✅ Lecture localStorage synchrone, appelée une seule fois par useState
-function getSavedLang(): Language {
-  if (typeof window === "undefined") return "fr";
-  const saved = localStorage.getItem("language");
-  return saved === "fr" || saved === "en" ? saved : "fr";
-}
-
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  // ✅ Lazy initializer : getSavedLang est appelé une seule fois, sans déclencher de re-rendu
-  const [lang, setLang] = useState<Language>(getSavedLang);
+  // 🟢 1. On initialise toujours par défaut à "fr" pour garantir une correspondance parfaite 
+  // entre le rendu du serveur (SSR) et le premier rendu du client (Hydratation).
+  const [lang, setLang] = useState<Language>("fr");
 
-  // ✅ Uniquement la sauvegarde — plus de lecture asynchrone
+  // 🟢 2. On récupère la préférence utilisateur depuis le localStorage uniquement 
+  // après que le composant est monté dans le navigateur (côté client).
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("language");
+      if (saved === "fr" || saved === "en") {
+        setLang(saved);
+      }
+    }
+  }, []);
+
+  // 🟢 3. On sauvegarde dans le localStorage à chaque modification de la langue
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("language", lang);

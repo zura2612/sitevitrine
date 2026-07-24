@@ -4,7 +4,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { usePageTranslations } from "@/hooks/usePageTranslations";
 import type { FooterTranslations } from "@/types/translations";
 import { siteConfig } from "@/config/site";
-import frFooterTranslations from "../../public/translations/footer.fr.json";// on est dans src/components
+//import frFooterTranslations from "../../src/translations/footer.fr.json";// on est dans src/components
 
 const sectionStyle = "mb-1 border border-black container-narrow";
 const currentYear = new Date().getFullYear();

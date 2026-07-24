@@ -14,7 +14,7 @@ import { usePageTranslations } from "@/hooks/usePageTranslations";
 import type { HeaderTranslations } from "@/types/translations";
 import { siteConfig } from "@/config/site";
 import { siteStyle } from "@/config/site";
-import frHeaderTranslations from "../../public/translations/header.fr.json";// on est dans src/components
+//import frHeaderTranslations from "../../src/translations/header.fr.json";// on est dans src/components
 
 const sectionStyle = "mb-1 border border-black container-narrow";
 const boutonStyle = "rounded-xl px-4 py-2 text-sm font-semibold text-center tracking-wider transition hover:opacity-80";

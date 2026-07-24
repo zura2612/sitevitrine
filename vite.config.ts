@@ -17,7 +17,7 @@ const config = defineConfig({
       prerender: {
         enabled: true, // active le prérendu (SSG) pour les pages publiques
         crawlLinks: true, // découvre automatiquement les pages liées
-        // ✅ Sécurisation : Exclusion stricte des zones privées et de l'administration
+        //Exclusion stricte des zones privées et de l'administration
         filter: ({ path }) => !path.startsWith('/rendez-vous') && !path.startsWith('/admin'), 
       },
       sitemap: {

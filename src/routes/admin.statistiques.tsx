@@ -25,6 +25,14 @@ interface StatsData {
   };
 }
 
+// 🟢 Fonction d'accord grammatical en français (0 ou 1 -> nouveau, > 1 -> nouveaux)
+function getNouveauLabel(count: number | string): string {
+  if (typeof count === 'number') {
+    return count <= 1 ? 'nouveau' : 'nouveaux';
+  }
+  return 'nouveaux';
+}
+
 function AdminStatsPage() {
   const { user, isLoading, getAccessToken } = useAuth();
   const { adminUser, isAdmin, isLoading: isAdminLoading } = useAdminUser();
@@ -158,7 +166,7 @@ function AdminStatsPage() {
                 <p className="text-sm text-gray-500 font-medium">Dernières 24 heures</p>
                 <div className="flex items-baseline gap-2 mt-2">
                   <span className="text-3xl font-bold text-gray-900">{signUps24h}</span>
-                  <span className="text-xs text-gray-400">nouveaux</span>
+                  <span className="text-xs text-gray-400">{getNouveauLabel(signUps24h)}</span>
                 </div>
               </div>
 
@@ -167,7 +175,7 @@ function AdminStatsPage() {
                 <p className="text-sm text-gray-500 font-medium">Derniers 7 jours</p>
                 <div className="flex items-baseline gap-2 mt-2">
                   <span className="text-3xl font-bold text-gray-900">{signUps7d}</span>
-                  <span className="text-xs text-gray-400">nouveaux</span>
+                  <span className="text-xs text-gray-400">{getNouveauLabel(signUps7d)}</span>
                 </div>
               </div>
 
@@ -176,7 +184,7 @@ function AdminStatsPage() {
                 <p className="text-sm text-gray-500 font-medium">Derniers 30 jours</p>
                 <div className="flex items-baseline gap-2 mt-2">
                   <span className="text-3xl font-bold text-gray-900">{signUps30d}</span>
-                  <span className="text-xs text-gray-400">nouveaux</span>
+                  <span className="text-xs text-gray-400">{getNouveauLabel(signUps30d)}</span>
                 </div>
               </div>
             </div>
